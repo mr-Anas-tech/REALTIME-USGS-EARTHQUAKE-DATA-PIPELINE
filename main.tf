@@ -1,6 +1,6 @@
 # 1. BigQuery Dataset
 resource "google_bigquery_dataset" "earthquake_raw" {
-  dataset_id                 = "Earthquake_raw"
+  dataset_id                 = "earthquake_raw"
   friendly_name              = "Earthquake Raw Data"
   description                = "Dataset for storing USGS earthquake raw data"
   location                   = "US-CENTRAL1"
