@@ -3,7 +3,7 @@ resource "google_bigquery_dataset" "earthquake_raw" {
   dataset_id                 = "earthquake_raw"
   friendly_name              = "Earthquake Raw Data"
   description                = "Dataset for storing USGS earthquake raw data"
-  location                   = "US-CENTRAL1"
+  location                   = "US"
   delete_contents_on_destroy = false
 }
 
