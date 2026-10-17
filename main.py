@@ -25,7 +25,7 @@ def run_usgs_pipeline():
     df.columns = df.columns.str.replace('.', '_', regex=False)
 
     project_id = "usgs-511715"
-    dataset_id = "earthquake_raw"
+    dataset_id = "Earthquake_raw"
     table_id = "raw_usgs_data"
     full_tabble_path = f"{project_id}.{dataset_id}.{table_id}"
 
@@ -66,5 +66,4 @@ def run_usgs_pipeline():
 
 if __name__ == "__main__":
     run_usgs_pipeline()
-
 

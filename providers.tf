@@ -10,5 +10,5 @@ terraform {
 
 provider "google" {
     project = "usgs-511715"
-    region = "us-central1"
+    region = "US"
 }

@@ -3,7 +3,7 @@ name: USGS Real-time Earthquake Ingestion
 on:
   schedule:
     # execution on every 30 minutes
-    - cron: '*/30 * * * *'
+    - cron: '17,47 * * * *'
   workflow_dispatch:
 
 jobs:
