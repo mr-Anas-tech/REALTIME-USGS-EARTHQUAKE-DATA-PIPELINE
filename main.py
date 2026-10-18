@@ -39,6 +39,15 @@ def run_usgs_pipeline():
 
     df = pd.json_normalize(features)
     df.columns = df.columns.str.replace('.', '_', regex=False)
+
+    # Fix for PyArrow integer/float truncation and list object conversion issues
+    for col in df.columns:
+        if df[col].apply(lambda x: isinstance(x, list)).any():
+            df[col] = df[col].astype(str)
+        elif df[col].dtype == 'float64':
+            df[col] = pd.to_numeric(df[col], errors='coerce')
+        elif df[col].dtype == 'object':
+            df[col] = df[col].astype(str)
     
     # Baaki ka BigQuery insertion code waisa hi rahega...
 
