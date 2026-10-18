@@ -13,6 +13,7 @@ def run_usgs_pipeline():
     start_date = (datetime.utcnow() - timedelta(days=365)).strftime('%Y-%m-%d')
 
     url = f'https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime={start_date}&endtime={end_date}'
+    print(f"Generated URL: {url}")
     response = requests.get(url)
 
     if response.status_code != 200:
