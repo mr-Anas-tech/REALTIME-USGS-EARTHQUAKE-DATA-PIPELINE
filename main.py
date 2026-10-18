@@ -3,10 +3,16 @@ from google.oauth2 import service_account
 import pandas as pd
 import os
 import json
+from datetime import datetime, timedelte
 import requests
 
+
 def run_usgs_pipeline():
-    url = "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=NOW-365day"
+    # Dynamic 1-year date range calculation
+    end_date = datetime.utcnow().strftime('%Y-%m-%d')
+    start_date = (datetime.utcnow() - timedelta(days=365)).strftime('%Y-%m-%d')
+
+    url = f'https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime={start_date}&endtime={end_date}'
     response = requests.get(url)
 
     if response.status_code != 200:
