@@ -85,7 +85,7 @@ def run_usgs_pipeline():
         destination_table=full_tabble_path,
         project_id=project_id,
         credentials=credentials,
-        if_exists="append",
+        if_exists="replace",
         progress_bar=False
     )
 
