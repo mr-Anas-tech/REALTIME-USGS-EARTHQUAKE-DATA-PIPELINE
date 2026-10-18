@@ -6,7 +6,7 @@ import json
 import requests
 
 def run_usgs_pipeline():
-    url = "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=NOW-5hour"
+    url = "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=NOW-365day"
     response = requests.get(url)
 
     if response.status_code != 200:
