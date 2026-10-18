@@ -8,30 +8,23 @@ import requests
 
 
 def run_usgs_pipeline():
-    all_features = []
+    end_time = datetime.utcnow()
+    start_time = end_time - timedelta(days=1) 
     
-    # 1 saal ko 4 quarterly chunks (90-90 din) mein divide karna taaki API 400 error na de
-    for i in range(4):
-        chunk_end = datetime.utcnow() - timedelta(days=i * 90)
-        chunk_start = chunk_end - timedelta(days=90)
-        
-        start_str = chunk_start.strftime('%Y-%m-%d')
-        end_str = chunk_end.strftime('%Y-%m-%d')
-        
-        url = f'https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime={start_str}&endtime={end_str}&minmagnitude=2.5'
-        print(f"Fetching chunk: {start_str} to {end_str}")
-        
-        response = requests.get(url)
-        if response.status_code == 200:
-            data = response.json()
-            features = data.get("features", [])
-            all_features.extend(features)
-            print(f"Fetched {len(features)} records from this chunk.")
-        else:
-            print(f"Error fetching chunk {start_str} to {end_str}: {response.status_code}")
-
-    features = all_features
-    print(f"Total fetched {len(features)} earthquake records from USGS API.")
+    start_str = start_time.strftime('%Y-%m-%d')
+    end_str = end_time.strftime('%Y-%m-%d')
+    
+    url = f'https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime={start_str}&endtime={end_str}&minmagnitude=1'
+    print(f"Fetching earthquake data from {start_str} to {end_str}")
+    
+    response = requests.get(url)
+    if response.status_code == 200:
+        data = response.json()
+        features = data.get("features", [])
+        print(f"Fetched {len(features)} records.")
+    else:
+        print(f"Error fetching data: {response.status_code}")
+        return
 
     if not features:
         print("No earthquake data found.")
@@ -39,8 +32,6 @@ def run_usgs_pipeline():
 
     df = pd.json_normalize(features)
     df.columns = df.columns.str.replace('.', '_', regex=False)
-
-    # Fix for PyArrow integer/float truncation and list object conversion issues
     for col in df.columns:
         if df[col].apply(lambda x: isinstance(x, list)).any():
             df[col] = df[col].astype(str)
@@ -49,7 +40,6 @@ def run_usgs_pipeline():
         elif df[col].dtype == 'object':
             df[col] = df[col].astype(str)
     
-    # Baaki ka BigQuery insertion code waisa hi rahega...
 
     project_id = "usgs-511715"
     dataset_id = "Earthquake_raw"
@@ -85,7 +75,7 @@ def run_usgs_pipeline():
         destination_table=full_tabble_path,
         project_id=project_id,
         credentials=credentials,
-        if_exists="replace",
+        if_exists="append",
         progress_bar=False
     )
 
