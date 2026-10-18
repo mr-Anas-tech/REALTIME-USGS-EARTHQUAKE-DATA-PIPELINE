@@ -3,7 +3,7 @@ from google.oauth2 import service_account
 import pandas as pd
 import os
 import json
-from datetime import datetime, timedelte
+from datetime import datetime, timedelta
 import requests
 
 
