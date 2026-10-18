@@ -8,28 +8,39 @@ import requests
 
 
 def run_usgs_pipeline():
-    # Dynamic 1-year date range calculation
-    end_date = datetime.utcnow().strftime('%Y-%m-%d')
-    start_date = (datetime.utcnow() - timedelta(days=365)).strftime('%Y-%m-%d')
+    all_features = []
+    
+    # 1 saal ko 4 quarterly chunks (90-90 din) mein divide karna taaki API 400 error na de
+    for i in range(4):
+        chunk_end = datetime.utcnow() - timedelta(days=i * 90)
+        chunk_start = chunk_end - timedelta(days=90)
+        
+        start_str = chunk_start.strftime('%Y-%m-%d')
+        end_str = chunk_end.strftime('%Y-%m-%d')
+        
+        url = f'https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime={start_str}&endtime={end_str}&minmagnitude=2.5'
+        print(f"Fetching chunk: {start_str} to {end_str}")
+        
+        response = requests.get(url)
+        if response.status_code == 200:
+            data = response.json()
+            features = data.get("features", [])
+            all_features.extend(features)
+            print(f"Fetched {len(features)} records from this chunk.")
+        else:
+            print(f"Error fetching chunk {start_str} to {end_str}: {response.status_code}")
 
-    url = f'https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime={start_date}&endtime={end_date}&minmagnitude=2.5'
-    print(f"Generated URL: {url}")
-    response = requests.get(url)
-
-    if response.status_code != 200:
-        print (f"Error fetching data from USGS API: {response.status_code}")
-        return
-
-    data = response.json()
-    features = data.get("features", [])
-    print(f"Fetched {len(features)} earthquake records from USGS API.")
+    features = all_features
+    print(f"Total fetched {len(features)} earthquake records from USGS API.")
 
     if not features:
-        print("No earthquake data found in the last hour.")
+        print("No earthquake data found.")
         return
 
     df = pd.json_normalize(features)
     df.columns = df.columns.str.replace('.', '_', regex=False)
+    
+    # Baaki ka BigQuery insertion code waisa hi rahega...
 
     project_id = "usgs-511715"
     dataset_id = "Earthquake_raw"
