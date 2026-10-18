@@ -17,6 +17,7 @@ select
     magnitude_severity_class,
     review_status,
     alert_level,
+    depth_km,
     has_tsunami_risk,
     risk_profile_flag,
     significance_score,

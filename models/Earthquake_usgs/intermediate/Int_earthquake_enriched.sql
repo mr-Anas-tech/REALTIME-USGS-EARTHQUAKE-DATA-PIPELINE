@@ -7,7 +7,11 @@ extracted_coordinates as (
         *,
         cast(coordinates_array[safe_offset(0)] as float64) as longitude,
         cast(coordinates_array[safe_offset(1)] as float64) as latitude,
-        cast(coordinates_array[safe_offset(2)] as float64) as depth_km
+        cast(coordinates_array[safe_offset(2)] as float64) as depth_km,
+        row_number() over (
+            partition by earthquake_id
+            order by coalesce(event_timestamp, current_timestamp()) desc
+        ) as row_num
     from staging_data
 ),
 
@@ -61,6 +65,7 @@ insights as (
         end as risk_profile_flag
 
     from extracted_coordinates
+    where row_num = 1
 )
 
 select * from insights
