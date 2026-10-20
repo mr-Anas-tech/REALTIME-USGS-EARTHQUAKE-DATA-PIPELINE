@@ -3,26 +3,43 @@ from google.oauth2 import service_account
 import pandas as pd
 import os
 import json
+from datetime import datetime, timedelta
 import requests
 
-def run_usgs_pipeline():
-    url = "https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime=NOW-1hour"
-    response = requests.get(url)
 
-    if response.status_code != 200:
-        print (f"Error fetching data from USGS API: {response.status_code}")
+def run_usgs_pipeline():
+    end_time = datetime.utcnow()
+    start_time = end_time - timedelta(days=1) 
+    
+    start_str = start_time.strftime('%Y-%m-%d')
+    end_str = end_time.strftime('%Y-%m-%d')
+    
+    url = f'https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime={start_str}&endtime={end_str}&minmagnitude=1'
+    print(f"Fetching earthquake data from {start_str} to {end_str}")
+    
+    response = requests.get(url)
+    if response.status_code == 200:
+        data = response.json()
+        features = data.get("features", [])
+        print(f"Fetched {len(features)} records.")
+    else:
+        print(f"Error fetching data: {response.status_code}")
         return
 
-    data = response.json()
-    features = data.get("features", [])
-    print(f"Fetched {len(features)} earthquake records from USGS API.")
-
     if not features:
-        print("No earthquake data found in the last hour.")
+        print("No earthquake data found.")
         return
 
     df = pd.json_normalize(features)
     df.columns = df.columns.str.replace('.', '_', regex=False)
+    for col in df.columns:
+        if df[col].apply(lambda x: isinstance(x, list)).any():
+            df[col] = df[col].astype(str)
+        elif df[col].dtype == 'float64':
+            df[col] = pd.to_numeric(df[col], errors='coerce')
+        elif df[col].dtype == 'object':
+            df[col] = df[col].astype(str)
+    
 
     project_id = "usgs-511715"
     dataset_id = "Earthquake_raw"
