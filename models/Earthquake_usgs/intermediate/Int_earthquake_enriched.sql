@@ -5,9 +5,9 @@ with staging_data as (
 extracted_coordinates as (
     select
         *,
-        cast(coordinates_array[safe_offset(0)] as float64) as longitude,
-        cast(coordinates_array[safe_offset(1)] as float64) as latitude,
-        cast(coordinates_array[safe_offset(2)] as float64) as depth_km,
+        cast(json_value(coordinates_array, '$[0]') as float64) as longitude,
+        cast(json_value(coordinates_array, '$[0]') as float64) as latitude,
+        cast(json_value(coordinates_array, '$[0]') as float64) as depth_km,
         row_number() over (
             partition by earthquake_id
             order by coalesce(event_timestamp, current_timestamp()) desc
