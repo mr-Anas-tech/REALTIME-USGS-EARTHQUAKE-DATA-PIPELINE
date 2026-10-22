@@ -34,11 +34,9 @@ def run_usgs_pipeline():
     df.columns = df.columns.str.replace('.', '_', regex=False)
     for col in df.columns:
         if df[col].apply(lambda x: isinstance(x, list)).any():
-            df[col] = df[col].astype(str)
-        elif df[col].dtype == 'float64':
-            df[col] = pd.to_numeric(df[col], errors='coerce')
+            df[col] = df[col].apply(lambda x: json.dumps(x) if isinstance(x, list) else None)
         elif df[col].dtype == 'object':
-            df[col] = df[col].astype(str)
+            df[col] = df[col].astype(str).replace({'None': None, 'nan': None, '<NA>': None})
     
 
     project_id = "usgs-511715"
