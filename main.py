@@ -14,7 +14,7 @@ def run_usgs_pipeline():
     start_str = start_time.strftime('%Y-%m-%d')
     end_str = end_time.strftime('%Y-%m-%d')
     
-    url = f'https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime={start_str}&endtime={end_str}&minmagnitude=1'
+    url = f'https://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&starttime={start_str}&endtime={end_str}&minmagnitude=0.05'
     print(f"Fetching earthquake data from {start_str} to {end_str}")
     
     response = requests.get(url)
