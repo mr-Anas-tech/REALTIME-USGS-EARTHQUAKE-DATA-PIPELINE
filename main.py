@@ -2,6 +2,7 @@ import os
 import json
 import requests
 import pandas as pd
+import pandas_gbq  # Modern replacement for df.to_gbq to avoid deprecation warnings
 from datetime import datetime, timedelta
 from google.cloud import bigquery
 from google.oauth2 import service_account
@@ -126,9 +127,9 @@ def run_usgs_pipeline():
     credentials = service_account.Credentials.from_service_account_info(service_account_info)
     bq_client = bigquery.Client(credentials=credentials, project=project_id)
 
-    # Fetch recent existing IDs to avoid duplicate insertions
+    # FIXED: Using properties_time instead of time to prevent BigQuery query error
     try:
-        query = f"SELECT id FROM `{full_tabble_path}` WHERE time >= TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 2 DAY)"
+        query = f"SELECT id FROM `{full_tabble_path}` WHERE properties_time >= TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 2 DAY)"
         existing_ids = set(row['id'] for row in bq_client.query(query).result())
     except Exception as e:
         print(f"Table query warning: {e}")
@@ -147,8 +148,9 @@ def run_usgs_pipeline():
     # Execution with Gemini AI Self-Healing Attempt
     # ---------------------------------------------------------
     try:
-        # First Attempt: Normal BigQuery insertion
-        df.to_gbq(
+        # First Attempt: Normal BigQuery insertion using pandas_gbq
+        pandas_gbq.to_gbq(
+            dataframe=df,
             destination_table=full_tabble_path,
             project_id=project_id,
             credentials=credentials,
@@ -166,7 +168,8 @@ def run_usgs_pipeline():
             healed_df = ai_self_heal_data(df, str(bq_err))
             
             print("Re-attempting BigQuery write with AI-healed dataset...")
-            healed_df.to_gbq(
+            pandas_gbq.to_gbq(
+                dataframe=healed_df,
                 destination_table=full_tabble_path,
                 project_id=project_id,
                 credentials=credentials,
@@ -180,4 +183,3 @@ def run_usgs_pipeline():
 
 if __name__ == "__main__":
     run_usgs_pipeline()
-
