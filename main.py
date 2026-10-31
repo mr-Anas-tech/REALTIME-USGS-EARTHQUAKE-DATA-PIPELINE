@@ -129,7 +129,7 @@ def run_usgs_pipeline():
 
     # FIXED: Using properties_time instead of time to prevent BigQuery query error
     try:
-        query = f"SELECT id FROM `{full_tabble_path}` WHERE properties_time >= TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 2 DAY)"
+        query = f"SELECT id FROM `{full_tabble_path}` WHERE TIMESTAMP_MILLIS(CAST(properties_time AS INT64)) >= TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 2 DAY)"
         existing_ids = set(row['id'] for row in bq_client.query(query).result())
     except Exception as e:
         print(f"Table query warning: {e}")
