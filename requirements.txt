@@ -5,3 +5,6 @@ pandas-gbq
 google-auth
 tenacity
 google-genai
+streamlit
+plotly
+db-dtypes
