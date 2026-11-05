@@ -8,26 +8,16 @@ import xgboost as xgb
 import mlflow.xgboost
 from google.cloud import bigquery
 
-# Current Directory Setup
-current_dir = os.path.dirname(os.path.abspath(__file__))
-key_path = os.path.join(current_dir, "../.secrets/gcp_service_account.json")
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = key_path
+# Google Colab Credentials Setup
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "/usgs-511715-2f007f20ac30.json"
 
-# FIX: Set SQLite Tracking URI & Custom Clean Artifacts Folder
-db_path = os.path.join(current_dir, "mlflow.db")
-artifacts_dir = os.path.join(current_dir, "mlruns_artifacts").replace("\\", "/")
+# SQLite Tracking URI Setup for Colab
+mlflow.set_tracking_uri("sqlite:///mlflow.db")
+experiment_name = "USGS_earthquake_risk_prediction_colab"
 
-mlflow.set_tracking_uri(f"sqlite:///{db_path}")
-
-# Explicitly create experiment with custom artifact location to prevent path breaking (# character issue)
-experiment_name = "USGS_earthquake_risk_prediction"
 experiment = mlflow.get_experiment_by_name(experiment_name)
-
 if experiment is None:
-    mlflow.create_experiment(
-        name=experiment_name,
-        artifact_location=f"file:///{artifacts_dir}"
-    )
+    mlflow.create_experiment(name=experiment_name)
 
 mlflow.set_experiment(experiment_name)
 
@@ -36,7 +26,7 @@ client = bigquery.Client()
 print("Gcp service account credentials loaded successfully.")
 
 query = """
-    select 
+    select
          loc.depth_km,
           loc.latitude,
           loc.longitude,
@@ -45,10 +35,10 @@ query = """
           fct.total_stations_used,
           fct.azimuthal_gap,
           IF(fct.magnitude >= 4.0, 1, 0) as is_high_risk
-    FROM `usgs-511715.usgs_dbt_marts.dim_earthquake_location` as loc
-    join `usgs-511715.usgs_dbt_marts.fct_earthquake_events` as fct 
+    FROM `usgs-511715.raw_usgs_data_marts.dim_earthquake_location` as loc
+    join `usgs-511715.raw_usgs_data_marts.fct_earthquake_events` as fct
           ON fct.earthquake_id = loc.earthquake_id
-    WHERE fct.magnitude IS NOT NULL          
+    WHERE fct.magnitude IS NOT NULL
 """
 
 print("Executing query to fetch data from BigQuery...")
@@ -68,7 +58,7 @@ scaler = StandardScaler()
 X_train_scaled = scaler.fit_transform(X_train)
 X_test_scaled = scaler.transform(X_test)
 
-# MLflow Training & Logging Execution
+# MLflow Training & Logging Execution (Cleaned for Colab)
 with mlflow.start_run():
     params = {
         "n_estimators": 150,
@@ -90,7 +80,8 @@ with mlflow.start_run():
     mlflow.log_metric("roc_auc", auc_score)
     mlflow.xgboost.log_model(model, artifact_path="xgboost_earthquake_model")
 
-    print(f"\n--- Model training completed! ---")
+    print(f"\n--- Model training completed successfully on Colab! ---")
     print(f"ROC AUC Score: {auc_score:.4f}")
     print("\nClassification Report:")
     print(classification_report(y_test, preds))
+    S
