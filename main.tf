@@ -7,7 +7,7 @@ resource "google_bigquery_dataset" "Earthquake_raw" {
   delete_contents_on_destroy = false
 }
 
-# 2. BigQuery Raw Table (Without Schema)
+# 2. BigQuery Raw Table 
 resource "google_bigquery_table" "raw_usgs_data" {
   dataset_id          = google_bigquery_dataset.Earthquake_raw.dataset_id
   table_id            = "raw_usgs_data"
