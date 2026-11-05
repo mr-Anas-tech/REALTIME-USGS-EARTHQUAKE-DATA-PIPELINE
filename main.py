@@ -2,11 +2,11 @@ import os
 import json
 import requests
 import pandas as pd
-import pandas_gbq  # Modern replacement for df.to_gbq to avoid deprecation warnings
+import pandas_gbq  
 from datetime import datetime, timedelta
 from google.cloud import bigquery
 from google.oauth2 import service_account
-from google import genai  # Google GenAI SDK for Gemini models
+from google import genai  
 
 # ---------------------------------------------------------
 # AI Self-Healing Agent Function (Powered by Gemini)
