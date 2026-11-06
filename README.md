@@ -511,7 +511,7 @@ Intermediate| Complex transformations and enrichment| Centralize reusable busine
 Marts| Analytical dimensions and facts| Provide business-ready datasets
 
 9.2 dbt project structure
-
+```
 USGS/
 ├── models/
 │   └── Earthquake_usgs/
@@ -527,7 +527,7 @@ USGS/
 ├── seeds/
 ├── snapshots/
 └── tests/
-
+```
 9.3 dbt lineage
 
 flowchart TD
