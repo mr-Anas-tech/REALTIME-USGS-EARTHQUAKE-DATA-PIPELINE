@@ -1,130 +1,84 @@
 🌍 USGS Global Seismic Intelligence Platform
 
-Cloud-Native Data Engineering | Analytics Engineering | AI-Assisted Pipeline Recovery | Machine Learning | Business Intelligence
+End-to-End Cloud Data Engineering | Analytics Engineering | AI-Assisted Pipeline Recovery | Machine Learning | Business Intelligence
 
-""Python" (https://img.shields.io/badge/Python-3.12+-blue?logo=python&logoColor=white)" (https://www.python.org/)
-""Google BigQuery" (https://img.shields.io/badge/Google%20BigQuery-Data%20Warehouse-4285F4?logo=googlebigquery&logoColor=white)" (https://cloud.google.com/bigquery)
-""Terraform" (https://img.shields.io/badge/Terraform-IaC-844FBA?logo=terraform&logoColor=white)" (https://developer.hashicorp.com/terraform)
-""dbt" (https://img.shields.io/badge/dbt-Analytics%20Engineering-FF694B?logo=dbt&logoColor=white)" (https://www.getdbt.com/)
-""Gemini AI" (https://img.shields.io/badge/Gemini-AI%20Recovery-8E75B2?logo=googlegemini&logoColor=white)" (https://ai.google.dev/)
-""XGBoost" (https://img.shields.io/badge/XGBoost-Machine%20Learning-EC6C26)" (https://xgboost.ai/)
-""MLflow" (https://img.shields.io/badge/MLflow-Experiment%20Tracking-0194E2?logo=mlflow&logoColor=white)" (https://mlflow.org/)
-""Streamlit" (https://img.shields.io/badge/Streamlit-Interactive%20Analytics-FF4B4B?logo=streamlit&logoColor=white)" (https://streamlit.io/)
-""Power BI" (https://img.shields.io/badge/Power%20BI-Executive%20Analytics-F2C811?logo=powerbi&logoColor=black)" (https://powerbi.microsoft.com/)
+<p align="left">
+  <img src="https://img.shields.io/badge/Python-3.12+-3776AB?logo=python&logoColor=white" alt="Python"/>
+  <img src="https://img.shields.io/badge/Google%20BigQuery-Data%20Warehouse-4285F4?logo=googlebigquery&logoColor=white" alt="BigQuery"/>
+  <img src="https://img.shields.io/badge/Terraform-Infrastructure%20as%20Code-844FBA?logo=terraform&logoColor=white" alt="Terraform"/>
+  <img src="https://img.shields.io/badge/dbt-Analytics%20Engineering-FF694B?logo=dbt&logoColor=white" alt="dbt"/>
+  <img src="https://img.shields.io/badge/Gemini-AI%20Recovery-8E75B2?logo=googlegemini&logoColor=white" alt="Gemini"/>
+  <img src="https://img.shields.io/badge/XGBoost-Machine%20Learning-EC6B23" alt="XGBoost"/>
+  <img src="https://img.shields.io/badge/MLflow-Experiment%20Tracking-0194E2?logo=mlflow&logoColor=white" alt="MLflow"/>
+  <img src="https://img.shields.io/badge/Streamlit-Web%20Application-FF4B4B?logo=streamlit&logoColor=white" alt="Streamlit"/>
+  <img src="https://img.shields.io/badge/Power%20BI-Business%20Intelligence-F2C811?logo=powerbi&logoColor=black" alt="Power BI"/>
+</p>---
 
----
+📌 1. Project Overview
 
-1. Project Overview
+The USGS Global Seismic Intelligence Platform is an end-to-end cloud-native data engineering and analytics solution designed to collect, process, transform, and analyze global earthquake telemetry from the United States Geological Survey (USGS).
 
-The USGS Global Seismic Intelligence Platform is a cloud-native data engineering and analytics solution designed to ingest, process, transform, and analyze global earthquake telemetry provided by the United States Geological Survey (USGS).
+The platform transforms semi-structured GeoJSON earthquake records into structured, analytics-ready datasets through an integrated architecture combining:
 
-The platform transforms semi-structured GeoJSON earthquake events into structured, analytics-ready datasets through an integrated architecture combining Infrastructure as Code (IaC), automated ingestion, AI-assisted error recovery, analytics engineering, machine learning, and interactive business intelligence.
+- Infrastructure as Code (Terraform)
+- Automated Python-based data ingestion
+- Google BigQuery data warehousing
+- Gemini-powered AI-assisted recovery
+- dbt analytics engineering
+- XGBoost machine learning
+- MLflow experiment tracking
+- Streamlit and Plotly visualization
+- Power BI executive reporting
 
-Unlike a conventional API-to-dashboard implementation, this project introduces an AI-assisted self-healing mechanism that uses Google's Gemini 2.5 Flash model to inspect ingestion failures, identify potential schema and data-type incompatibilities, and propose structured in-memory data corrections before retrying failed BigQuery writes.
+The engineering challenge
 
-The resulting data is modeled through dbt into dimensional and fact tables, evaluated through an XGBoost classification workflow, and exposed through interactive Streamlit and Power BI reporting interfaces.
+Earthquake data is continuously updated and delivered through semi-structured API responses. Changes in source attributes, inconsistent data types, nested JSON structures, and repeated API records can introduce ingestion and transformation failures.
 
-The engineering problem
+A conventional API-to-dashboard implementation does not adequately address these operational challenges.
 
-Earthquake telemetry is continuously updated, semi-structured, and potentially inconsistent across incoming API responses. A conventional ingestion pipeline can encounter:
+This project explores a more resilient approach by introducing an AI-assisted recovery mechanism that uses Gemini 2.5 Flash to analyze ingestion errors and propose structured data corrections.
 
-- Unexpected or newly introduced source attributes.
-- Inconsistent data types across JSON records.
-- Nested arrays and complex GeoJSON structures.
-- Duplicate events during overlapping ingestion windows.
-- Invalid or missing analytical attributes.
-- Downstream transformation failures caused by upstream schema changes.
+The proposed corrections are validated through deterministic application logic before being applied.
 
-These issues can compromise data quality, interrupt ingestion, and increase operational maintenance.
+What does the platform deliver?
 
-The proposed solution
-
-The platform addresses these challenges through five engineering principles:
-
-1. Infrastructure automation: Provision BigQuery resources declaratively using Terraform.
-2. Resilient ingestion: Automate API extraction, normalization, deduplication, and warehouse loading using Python.
-3. AI-assisted recovery: Use Gemini to diagnose ingestion errors and propose controlled data repairs.
-4. Reliable analytical modeling: Implement modular dbt transformations, freshness monitoring, and automated data tests.
-5. Decision-oriented analytics: Deliver machine learning experiments, geospatial monitoring, and executive BI reporting.
-
-Project objectives
-
-Objective| Engineering implementation| Expected value
-Automated infrastructure| Terraform + BigQuery| Reproducible cloud environments
-Reliable ingestion| Python + Pandas| Consistent data collection
-Failure recovery| Gemini 2.5 Flash| Reduced manual troubleshooting
-Data standardization| dbt| Reusable analytical models
-Data quality| dbt tests + freshness| Improved analytical reliability
-Predictive classification| XGBoost + MLflow| Reproducible ML experiments
-Interactive analytics| Streamlit + Plotly| Accessible seismic exploration
-Executive reporting| Power BI| Business-oriented decision support
+Engineering area| Implementation| Outcome
+Infrastructure| Terraform + GCP| Reproducible cloud resources
+Data ingestion| Python + Pandas| Automated API extraction
+Data warehouse| Google BigQuery| Centralized analytical storage
+AI-assisted recovery| Gemini 2.5 Flash| Structured error diagnosis
+Orchestration| GitHub Actions| Scheduled ingestion execution
+Transformation| dbt Cloud| Modular analytical models
+Data quality| dbt tests + freshness| Validated analytical datasets
+Machine learning| XGBoost| Threshold-based classification experiment
+Experiment tracking| MLflow| Reproducible ML experiments
+Application| Streamlit + Plotly| Interactive seismic exploration
+Business intelligence| Power BI| Executive reporting
 
 ---
 
-2. Key Platform Capabilities
+🏗️ 2. Platform Architecture
 
-Capability| Implementation| Purpose
-Automated cloud provisioning| HCP Terraform Cloud| Infrastructure consistency
-Global seismic ingestion| USGS GeoJSON API| Collect earthquake telemetry
-Dynamic JSON normalization| Python + Pandas| Standardize semi-structured data
-Duplicate prevention| BigQuery SQL + Python| Avoid repeated event ingestion
-AI-assisted recovery| Gemini 2.5 Flash| Diagnose and repair compatible ingestion errors
-Data warehousing| Google BigQuery| Centralized analytical storage
-Scheduled orchestration| GitHub Actions| Automated ingestion execution
-Transformation| dbt Cloud| Modular analytical data modeling
-Data quality| dbt tests| Validate critical data constraints
-Experiment tracking| MLflow| Reproducible model experiments
-Classification| XGBoost| Classify threshold-defined seismic events
-Interactive analytics| Streamlit + Plotly| Explore global earthquake activity
-Executive BI| Power BI| Monitor operational metrics
-
----
-
-3. Technology Stack & Engineering Rationale
-
-The technology selection is based on architectural responsibilities, scalability, maintainability, and the practical requirements of an end-to-end analytical platform.
-
-Technology| Architectural responsibility| Why this technology?| Engineering / business value
-HCP Terraform Cloud| Infrastructure as Code| Declarative resource management provides consistent infrastructure definitions.| Reduces manual configuration and infrastructure drift.
-Google Cloud Platform| Cloud infrastructure| Provides managed cloud services for data storage and analytical workloads.| Reduces infrastructure administration.
-BigQuery| Data warehouse| Serverless analytical storage supports SQL-based processing at scale.| Centralizes raw and modeled seismic datasets.
-Python 3.12+| Ingestion orchestration| Flexible API integration, JSON handling, and data processing.| Enables customizable extraction and recovery logic.
-Pandas| Data manipulation| Simplifies normalization, transformation, and validation.| Converts complex API responses into tabular structures.
-pandas-gbq| Warehouse loading| Provides a Python interface for loading DataFrames into BigQuery.| Simplifies warehouse integration.
-Gemini 2.5 Flash| AI-assisted recovery| Analyzes runtime errors and proposes structured remediation instructions.| Reduces repetitive manual schema troubleshooting.
-GitHub Actions| CI/CD and scheduling| Provides repository-based automated execution.| Removes dependency on a continuously running local machine.
-dbt Cloud| Analytics engineering| Organizes transformations into reusable and testable SQL models.| Improves lineage, maintainability, and analytical consistency.
-SQL| Data transformation| Enables warehouse-native transformations and analytical logic.| Reduces unnecessary data movement.
-XGBoost| Machine learning| Gradient-boosted decision trees are effective for structured tabular data.| Supports classification experiments.
-MLflow| Experiment tracking| Records parameters, metrics, and model artifacts.| Improves reproducibility and experiment comparison.
-Streamlit| Application layer| Converts Python analytical workflows into interactive applications.| Makes analytical insights accessible to users.
-Plotly| Visualization| Supports interactive charts and geographical exploration.| Improves analytical investigation.
-Power BI| Executive reporting| Provides business-oriented reporting and interactive dashboards.| Communicates analytical findings to stakeholders.
-
----
-
-4. End-to-End System Architecture
-
-The architecture follows a layered data engineering approach, separating infrastructure provisioning, data ingestion, raw storage, analytical transformation, machine learning, and reporting.
+The platform follows a layered architecture that separates infrastructure, ingestion, storage, transformation, machine learning, and reporting.
 
 High-level architecture
 
 flowchart TD
-    A["USGS Public Earthquake API"] --> B["Python Ingestion Engine"]
+    A["USGS Earthquake API"] --> B["Python Ingestion Engine"]
 
-    B --> C["JSON Normalization & Validation"]
-    C --> D["Deduplication & Incremental Filtering"]
-    D --> E["BigQuery Ingestion"]
+    B --> C["JSON Normalization"]
+    C --> D["Data Validation"]
+    D --> E["Deduplication"]
 
-    E -->|Success| F["BigQuery Raw Dataset"]
-    E -->|Failure| G["Gemini AI Recovery Agent"]
+    E --> F["BigQuery Raw Warehouse"]
 
-    G --> H["Structured Repair Instructions"]
-    H --> I["DataFrame Validation & Repair"]
+    E -->|Ingestion Failure| G["Gemini 2.5 Flash"]
+    G --> H["Structured Repair Proposal"]
+    H --> I["Validation and Allowlisted Repair"]
     I --> J["Controlled Retry"]
     J --> F
 
-    K["Terraform Cloud"] --> L["GCP Infrastructure"]
+    K["Terraform / HCP Terraform"] --> L["GCP Infrastructure"]
     L --> F
 
     M["GitHub Actions"] --> B
@@ -134,59 +88,125 @@ flowchart TD
     O --> P["Dimension Mart"]
     O --> Q["Fact Mart"]
 
-    P --> R["Machine Learning"]
+    P --> R["XGBoost + MLflow"]
     Q --> R
-    R --> S["XGBoost + MLflow"]
 
-    P --> T["Streamlit + Plotly"]
+    P --> S["Streamlit + Plotly"]
+    Q --> S
+
+    P --> T["Power BI"]
     Q --> T
-    P --> U["Power BI"]
-    Q --> U
 
-Architecture design rationale
+Architecture principles
 
-Why a layered architecture?
+Separation of responsibilities: Infrastructure provisioning, ingestion, transformations, and reporting are maintained as distinct components.
 
-Each component has a clearly defined responsibility.
+Raw data preservation: Source data is stored independently from curated analytical models.
 
-- Infrastructure is separated from application logic.
-- Ingestion is separated from transformation.
-- Raw data is preserved independently of analytical models.
-- Business logic is centralized in dbt.
-- Machine learning and BI consume curated datasets rather than independently processing raw API responses.
+Centralized business logic: dbt provides reusable transformation logic rather than duplicating calculations across applications.
 
-This separation makes the platform easier to debug, extend, test, and maintain.
+Controlled AI integration: Gemini proposes remediation actions, while deterministic Python validation controls execution.
+
+Independent consumption: Machine learning, Streamlit, and Power BI consume curated warehouse models.
 
 ---
 
-5. Infrastructure as Code — Terraform & BigQuery
+☁️ 3. Technology Stack
 
-5.1 Infrastructure provisioning
+Technology| Responsibility| Why it is used
+Python 3.12+| Data ingestion| API integration and data processing
+Pandas| Data normalization| Converts nested JSON into tabular records
+pandas-gbq| BigQuery loading| Transfers DataFrames into BigQuery
+Google Cloud| Cloud infrastructure| Managed cloud environment
+BigQuery| Data warehouse| Scalable analytical SQL processing
+Terraform| Infrastructure as Code| Declarative resource provisioning
+HCP Terraform Cloud| Terraform execution| Centralized infrastructure workflows
+Gemini 2.5 Flash| AI-assisted recovery| Diagnoses data compatibility errors
+GitHub Actions| Automation| Scheduled and manually triggered execution
+dbt Cloud| Analytics engineering| Modular SQL transformations and tests
+SQL| Data modeling| Warehouse-native analytical processing
+XGBoost| Classification| Gradient-boosted tree model
+MLflow| Experiment tracking| Records parameters, metrics, and artifacts
+Streamlit| Application layer| Interactive Python web application
+Plotly| Visualization| Interactive charts and maps
+Power BI| Business intelligence| Executive analytics and reporting
 
-The platform uses HashiCorp Terraform to define and provision Google Cloud BigQuery resources.
+---
 
-Instead of manually creating datasets and tables through the cloud console, infrastructure definitions are maintained as version-controlled configuration files.
+🌎 4. Data Source — USGS Earthquake API
+
+Primary provider: United States Geological Survey
+
+API documentation:
+https://earthquake.usgs.gov/fdsnws/event/1/
+
+GeoJSON feeds:
+https://earthquake.usgs.gov/earthquakes/feed/v1.0/geojson.php
+
+The ingestion engine retrieves earthquake events through the USGS FDSN Event Web Service.
+
+Extraction parameters
+
+The current implementation uses:
+
+Parameter| Purpose
+"starttime"| Beginning of extraction window
+"endtime"| End of extraction window
+"minmagnitude"| Minimum earthquake magnitude
+Response format| GeoJSON
+Extraction window| Rolling 24-hour window
+Minimum magnitude| 0.05
+
+GeoJSON structure
+
+USGS records contain two principal components.
+
+Properties
+
+- Event ID
+- Magnitude
+- Location description
+- Event timestamp
+- Updated timestamp
+- Alert status
+- Felt reports
+- Significance score
+- Station measurements
+
+Geometry
+
+- Geometry type
+- Longitude
+- Latitude
+- Depth in kilometers
+
+Why GeoJSON?
+
+GeoJSON provides a standardized structure for geographical features and their attributes. It allows the platform to retain both seismic measurements and spatial coordinates for analytical processing.
+
+---
+
+⚙️ 5. Infrastructure as Code — Terraform & BigQuery
+
+Infrastructure provisioning
+
+The project uses Terraform to define and provision Google Cloud BigQuery resources.
+
+Instead of manually creating warehouse resources through the cloud console, infrastructure definitions are maintained as version-controlled configuration files.
 
 Why Terraform?
 
-Manual cloud provisioning creates several operational challenges:
+Manual provisioning can introduce inconsistent configurations, repetitive deployment work, and infrastructure drift.
 
-- Resource configurations can become inconsistent.
-- Recreating environments requires repetitive manual work.
-- Infrastructure changes are difficult to review.
-- Deployment processes become dependent on individual operators.
+Terraform provides declarative infrastructure management, making cloud resources easier to review, reproduce, and maintain.
 
-Terraform addresses these problems through declarative infrastructure management.
-
-5.2 BigQuery resource configuration
-
-The project provisions the following resources:
+Provisioned resources
 
 Resource| Configuration| Purpose
-GCP Project| "usgs-511715"| Cloud project boundary
+GCP Project| "usgs-511715"| Cloud project
 Dataset| "Earthquake_raw"| Raw telemetry storage
 Table| "raw_usgs_data"| Incoming USGS records
-Location| "US"| BigQuery multi-region storage
+Location| "US"| BigQuery multi-region
 
 Terraform implementation
 
@@ -208,338 +228,268 @@ resource "google_bigquery_table" "raw_usgs_data" {
 
 providers.tf
 
-The provider configuration binds Terraform execution to the target GCP project using the Google provider and a version constraint of "~> 5.0".
+The Google Terraform provider connects infrastructure execution to the target GCP project, using the configured Google provider version constraint of "~> 5.0".
 
 Why BigQuery?
 
-BigQuery provides a managed analytical warehouse without requiring the project to operate its own database infrastructure.
+BigQuery provides managed analytical storage without requiring the project to maintain its own database servers.
 
-Its SQL processing capabilities also make it suitable for:
+It also supports:
 
-- Large-scale analytical queries.
-- Raw and curated data separation.
-- dbt-based transformations.
-- Power BI connectivity.
-- Machine learning feature extraction.
+- SQL-based transformations
+- Large-scale analytical queries
+- dbt integration
+- Power BI connectivity
+- Machine learning feature extraction
 
-Important design consideration: The raw table's schema must be managed consistently with the ingestion process. Terraform provisioning alone does not guarantee automatic schema evolution or compatibility with every future API response.
+Schema consideration: Terraform provisions the warehouse resources, but it does not automatically guarantee compatibility with every future API schema change. Schema management must be handled through the ingestion and data validation process.
 
 ---
 
-6. Python Data Ingestion & Deduplication Engine
+🐍 6. Python Data Ingestion Engine
 
-6.1 Data source
+Ingestion workflow
 
-The platform collects seismic event data from the official USGS Earthquake API.
-
-Data provider: United States Geological Survey
-
-API resource:
-https://earthquake.usgs.gov/fdsnws/event/1/
-
-Response format: GeoJSON
-
-The ingestion process uses API query parameters such as:
-
-- "starttime"
-- "endtime"
-- "minmagnitude"
-
-The current implementation targets a rolling 24-hour extraction window and a minimum magnitude threshold of 0.05.
-
-Why GeoJSON?
-
-GeoJSON provides a structured representation of geographical features and their associated attributes.
-
-Each earthquake event contains two primary information groups:
-
-Properties
-
-- Event ID.
-- Magnitude.
-- Event location description.
-- Event timestamp.
-- Updated timestamp.
-- Alert status.
-- Felt reports.
-- Significance score.
-- Station measurements.
-
-Geometry
-
-- Geometry type.
-- Longitude.
-- Latitude.
-- Depth in kilometers.
-
-This structure allows the pipeline to retain both seismic measurements and geographical information.
-
-6.2 Ingestion workflow
+The Python ingestion engine retrieves earthquake records, normalizes GeoJSON responses, validates the resulting data, checks existing event IDs, and loads eligible records into BigQuery.
 
 flowchart TD
     A["USGS REST API"] --> B["Fetch Recent Events"]
     B --> C["Parse GeoJSON"]
     C --> D["Normalize JSON Properties"]
-    D --> E["Convert to Pandas DataFrame"]
-    E --> F["Clean Columns & Nested Objects"]
-    F --> G["Query Existing BigQuery Event IDs"]
-    G --> H["Filter Previously Ingested Events"]
-    H --> I["Validate DataFrame"]
-    I --> J["Load into BigQuery"]
+    D --> E["Pandas DataFrame"]
+    E --> F["Clean and Validate Columns"]
+    F --> G["Query Existing Event IDs"]
+    G --> H["Filter Previously Ingested Records"]
+    H --> I["BigQuery Load"]
 
-6.3 Data normalization
+Data normalization
 
-What happens?
+The ingestion engine converts semi-structured JSON objects into tabular DataFrame records.
 
-The Python ingestion engine converts semi-structured JSON event objects into tabular DataFrame records.
+Key operations include:
 
-Nested attributes are normalized into individual columns, while complex list structures are serialized into JSON strings where required by the warehouse loading strategy.
+- Extracting event properties
+- Standardizing column names
+- Converting numerical fields
+- Handling missing values
+- Serializing nested structures where required
+- Preparing geographical attributes
+- Validating destination compatibility
 
-Why is normalization necessary?
+Why normalization?
 
-Raw API responses are designed for flexible data exchange rather than direct analytical querying.
+Raw API responses are designed for flexible data exchange, not direct analytical querying.
 
-Normalization makes event attributes easier to:
+Normalization makes the data easier to store, validate, query, and transform through dbt.
 
-- Validate.
-- Store.
-- Query.
-- Transform.
-- Model through dbt.
+Incremental ingestion and deduplication
 
-6.4 Incremental ingestion and deduplication
+The current implementation uses a rolling 24-hour extraction window and checks existing BigQuery event IDs across the previous two days.
 
-The ingestion process uses a rolling extraction window and checks previously stored event IDs in BigQuery.
+The USGS event ID ("id") acts as the logical identifier.
 
-The existing-event verification query examines records across the previous two days using the event timestamp.
+Why deduplication?
 
-The event ID ("id") acts as the logical event identifier.
+Overlapping API extraction windows can repeatedly return previously collected records. Without deduplication, repeated records can inflate event counts and distort downstream aggregations.
 
-Why deduplication matters
+The current event-ID filtering approach reduces this risk.
 
-Rolling extraction windows can repeatedly return previously collected events.
-
-Without deduplication, repeated API responses can inflate event counts, distort aggregate metrics, and introduce duplicate records into downstream analytical models.
-
-The deduplication process reduces these risks by excluding already-ingested events.
-
-Important: The ingestion window and deduplication logic should also account for updated USGS events. A future improvement is to use event ID plus update timestamp, or an upsert/MERGE strategy, to capture revised event attributes without creating duplicates.
+Future improvement: Use an event ID and source update timestamp with a BigQuery "MERGE" strategy. This would allow the platform to update previously collected records when USGS revises an event rather than simply skipping that event.
 
 ---
 
-7. AI-Powered Self-Healing Ingestion — Gemini 2.5 Flash
+🤖 7. AI-Assisted Self-Healing Pipeline — Gemini 2.5 Flash
 
-7.1 Problem statement
+The problem
 
-Traditional ingestion systems commonly rely on predefined schemas and deterministic data conversion rules.
+Data ingestion pipelines can fail when incoming API records no longer match the expected warehouse schema.
 
-When an API introduces an unexpected attribute or changes an existing data type, the ingestion process may fail because the incoming DataFrame no longer matches the destination table schema.
+Examples include:
 
-This project introduces an AI-assisted recovery mechanism to improve ingestion resilience.
+- Unexpected source columns
+- Incompatible data types
+- Nested arrays
+- Unsupported values
+- Schema mismatches
 
-7.2 Why Gemini 2.5 Flash?
+Traditional pipelines generally require developers to investigate these errors and manually modify their transformation logic.
 
-Gemini 2.5 Flash is integrated as an error-diagnosis and remediation assistant.
+The AI-assisted approach
 
-It can inspect structured error context and recommend transformations based on the observed incompatibility.
+This project integrates Gemini 2.5 Flash as an error-diagnosis and remediation assistant.
 
-Rather than manually investigating every supported schema mismatch, the recovery agent can propose a machine-readable remediation plan.
+The model receives relevant diagnostic context and proposes structured corrections that can be validated by the Python application.
 
-7.3 Self-healing architecture
+Recovery architecture
 
 flowchart TD
-    A["Normalized Pandas DataFrame"] --> B["BigQuery Write Attempt"]
+    A["Pandas DataFrame"] --> B["BigQuery Write Attempt"]
+
     B -->|Success| C["Ingestion Completed"]
     B -->|Failure| D["Capture Exception"]
 
-    D --> E["Collect Error & Schema Context"]
+    D --> E["Collect Error and Schema Context"]
     E --> F["Gemini 2.5 Flash"]
 
-    F --> G["Structured JSON Repair Plan"]
+    F --> G["JSON Repair Proposal"]
     G --> H["Validate Proposed Actions"]
 
     H -->|Approved| I["Apply In-Memory Repair"]
-    H -->|Rejected| J["Log & Quarantine Failure"]
+    H -->|Rejected| J["Log and Quarantine Failure"]
 
-    I --> K["Retry BigQuery Write"]
+    I --> K["Controlled Retry"]
+
     K -->|Success| C
     K -->|Failure| J
 
-7.4 Self-healing execution logic
-
-The recovery process follows four stages.
+Recovery stages
 
 Stage 1 — Failure interception
 
-The ingestion engine catches exceptions raised during the BigQuery loading operation.
+The ingestion application catches exceptions raised during the BigQuery loading operation.
 
-Stage 2 — Context analysis
+Stage 2 — Diagnostic context
 
-The agent receives relevant diagnostic information:
+The recovery process prepares relevant information:
 
-- Error traceback.
-- DataFrame column names.
-- Data type information.
-- Representative payload samples.
-- Destination schema information, where available.
+- Error message
+- DataFrame column names
+- Data type information
+- Representative records
+- Destination schema information, where available
 
-Stage 3 — Structured remediation
+Stage 3 — AI-assisted diagnosis
 
-Gemini returns a JSON-formatted repair proposal.
+Gemini analyzes the diagnostic context and returns a structured repair proposal.
 
-Potential remediation actions include:
+Potential operations include:
 
-- Serializing nested arrays into JSON strings.
-- Converting compatible values into expected data types.
-- Identifying conflicting columns.
-- Recommending the removal of unsupported attributes when explicitly permitted by the schema policy.
+- Serializing supported nested structures
+- Converting compatible values
+- Identifying conflicting columns
+- Recommending permitted schema-compatible changes
 
 Stage 4 — Validation and retry
 
-The ingestion engine validates the proposed changes, applies permitted transformations in memory, and retries the warehouse write.
+The Python application validates the proposed instructions, applies permitted in-memory transformations, and attempts a controlled retry.
 
-Why this architecture is useful
+Why use AI-assisted recovery?
 
-- Reduces repetitive manual debugging.
-- Helps diagnose previously unseen data compatibility issues.
-- Keeps ingestion logic separate from AI diagnosis.
-- Supports extensible recovery rules.
-- Provides a foundation for intelligent data-quality automation.
+The purpose is to reduce repetitive manual troubleshooting and provide a flexible diagnostic mechanism for previously unseen data compatibility problems.
 
-Production reliability considerations
+Production safety controls
 
-AI-generated transformations must never be treated as automatically trustworthy.
+AI-generated instructions must never be treated as automatically trustworthy.
 
 A production implementation should enforce:
 
 1. Strict JSON schema validation.
-2. Explicit allowlisted transformation operations.
-3. Mandatory preservation of business-critical fields.
-4. Row-count and schema checks before retry.
+2. Explicit allowlisted operations.
+3. Preservation of required business fields.
+4. Row-count and schema validation.
 5. Limited retry attempts.
 6. Failed-record quarantine.
-7. Audit logging of every AI-proposed repair.
-8. Human approval for destructive or ambiguous transformations.
+7. Audit logging.
+8. Human approval for destructive or ambiguous changes.
 
-Design principle: Gemini proposes a repair; deterministic application logic validates and executes only permitted actions.
+Core principle: Gemini proposes a repair. Deterministic application logic validates and executes only permitted actions.
 
-The recovery mechanism improves resilience, but it does not guarantee zero downtime or successful recovery from every possible failure.
+This is an AI-assisted recovery mechanism, not a guarantee of zero downtime or recovery from every possible failure.
 
 ---
 
-8. Automated Continuous Ingestion — GitHub Actions
+🔄 8. Automated Ingestion — GitHub Actions
 
-8.1 Workflow overview
+The project uses GitHub Actions to execute the Python ingestion workflow automatically.
 
-The platform uses GitHub Actions to execute the Python ingestion service automatically.
+Workflow capabilities
 
-The workflow supports:
+- Scheduled cron execution
+- Manual execution using "workflow_dispatch"
+- Ubuntu-hosted runners
+- Python 3.12 environment
+- Dependency installation
+- Secure credential injection
+- Automated execution of "main.py"
 
-- Scheduled cron execution.
-- Manual execution through "workflow_dispatch".
-- Ephemeral Ubuntu-hosted runners.
-- Python 3.12 environment setup.
-- Dependency installation.
-- Secure credential injection.
-- Automated ingestion execution.
-
-8.2 Execution architecture
+Execution architecture
 
 flowchart TD
     A["GitHub Scheduler / Manual Trigger"] --> B["Ubuntu Hosted Runner"]
     B --> C["Checkout Repository"]
-    C --> D["Configure Python 3.12"]
-    D --> E["Install requirements.txt"]
+    C --> D["Configure Python"]
+    D --> E["Install Dependencies"]
     E --> F["Load GitHub Secrets"]
     F --> G["Authenticate with GCP"]
     G --> H["Execute main.py"]
-    H --> I["USGS Data Ingestion"]
+    H --> I["USGS Data Extraction"]
     I --> J["BigQuery Raw Dataset"]
 
-8.3 Secure credential management
-
-The workflow uses encrypted GitHub repository secrets to supply credentials at runtime.
-
-Expected configuration:
+Required GitHub Secrets
 
 Secret| Purpose
 "GCP_SA_KEY"| Google Cloud service account credentials
 "GEMINI_API_KEY"| Gemini API authentication
 
-Why GitHub Secrets?
+Why GitHub Actions?
 
-Hardcoding credentials inside Python files or repository configuration creates a serious security risk.
+GitHub Actions removes the dependency on a continuously running local machine and provides a centralized environment for automated execution.
 
-GitHub Secrets keeps sensitive values outside the source code and makes them available to the workflow when required.
-
-8.4 Why scheduled execution?
-
-A scheduled workflow removes the need for a continuously running local machine or manually operated ingestion script.
-
-The current architecture is scheduled batch ingestion rather than continuous streaming.
-
-GitHub Actions cron execution can be delayed by shared runner availability and scheduling constraints. Therefore, the configured cron interval should be treated as the intended execution frequency, not a guaranteed execution time.
-
-Operational value
-
-- Automated recurring data collection.
-- Reproducible execution environments.
-- Reduced local machine dependency.
-- Centralized workflow configuration.
-- Easier operational monitoring.
+Execution model: The current implementation uses scheduled batch ingestion. GitHub Actions scheduling is not guaranteed to run at an exact minute, and this architecture should not be described as continuous streaming.
 
 ---
 
-9. Analytics Engineering & Data Transformation — dbt Cloud
+🧱 9. Analytics Engineering — dbt Cloud
 
-9.1 Why dbt?
+Why dbt?
 
-Raw seismic telemetry is not immediately suitable for business intelligence or analytical modeling.
+Raw seismic telemetry is not immediately suitable for analytical reporting.
 
-It contains semi-structured attributes, inconsistent data types, and geographical information that needs standardization.
+The platform uses dbt to standardize raw data, centralize business logic, build reusable SQL models, and validate analytical datasets.
 
-dbt provides a modular SQL transformation framework that converts raw warehouse data into reusable analytical models.
+Data transformation layers
 
-Why separate staging, intermediate, and mart layers?
+Layer| Responsibility| Purpose
+Source| Raw USGS records| Preserve ingestion boundary
+Staging| Standardization and casting| Consistent field definitions
+Intermediate| Enrichment and business logic| Reusable transformations
+Marts| Dimensions and facts| Business-ready datasets
 
-Each layer has a distinct responsibility:
+dbt project structure
 
-Layer| Responsibility| Why it exists
-Source| Raw API data| Preserve the original ingestion boundary
-Staging| Standardization and type casting| Establish consistent field definitions
-Intermediate| Complex transformations and enrichment| Centralize reusable business logic
-Marts| Analytical dimensions and facts| Provide business-ready datasets
+models/
+└── Earthquake_usgs/
+    ├── intermediate/
+    │   └── int_earthquake_enriched.sql
+    │
+    ├── marts/
+    │   ├── dim_earthquake_location.sql
+    │   ├── fct_earthquake_events.sql
+    │   └── marts_test.yml
+    │
+    ├── earthquake.sql
+    └── earthquake.yml
 
-9.2 dbt project structure
-```
-USGS/
-├── models/
-│   └── Earthquake_usgs/
-│       ├── intermediate/
-│       │   └── int_earthquake_enriched.sql
-│       ├── marts/
-│       │   ├── dim_earthquake_location.sql
-│       │   ├── fct_earthquake_events.sql
-│       │   └── marts_test.yml
-│       ├── earthquake.sql
-│       └── earthquake.yml
-├── macros/
-├── seeds/
-├── snapshots/
-└── tests/
-```
-9.3 dbt lineage
+dbt lineage
 
 flowchart TD
-    A["BigQuery: Earthquake_raw.raw_usgs_data"]
-    A --> B["earthquake.sql - Staging"]
-    B --> C["int_earthquake_enriched.sql - Intermediate"]
-    C --> D["dim_earthquake_location.sql"]
-    C --> E["fct_earthquake_events.sql"]
-    D --> F["Streamlit / Power BI / ML"]
+    A["BigQuery Raw Table"]
+    A --> B["earthquake.sql"]
+    B --> C["int_earthquake_enriched.sql"]
+
+    C --> D["dim_earthquake_location"]
+    C --> E["fct_earthquake_events"]
+
+    D --> F["Streamlit"]
     E --> F
 
-9.4 Source freshness monitoring
+    D --> G["Power BI"]
+    E --> G
+
+    D --> H["Machine Learning"]
+    E --> H
+
+9.1 Source freshness
 
 File: "earthquake.yml"
 
@@ -551,47 +501,43 @@ sources:
   - name: Earthquake_raw
     database: usgs-511715
     schema: Earthquake_raw
+
     tables:
       - name: raw_usgs_data
         config:
-          loaded_at_field: timestamp_millis(
-            cast(properties_updated as int64)
-          )
+          loaded_at_field: >
+            timestamp_millis(
+              cast(properties_updated as int64)
+            )
+
           freshness:
             warn_after:
               count: 5
               period: day
+
             error_after:
               count: 10
               period: day
 
-Why source freshness?
+Freshness policy
 
-A technically successful transformation does not necessarily mean the upstream data is current.
+Condition| Threshold
+Warning| 5 days
+Error| 10 days
 
-Freshness checks monitor the time elapsed since the latest source update.
+Why freshness monitoring?
 
-The current policy is:
+A successful transformation does not necessarily mean the upstream data is current.
 
-- Warning after five days.
-- Error after ten days.
+Freshness monitoring helps detect delayed source updates before stale data silently enters reporting.
 
-This makes delayed ingestion more visible and prevents stale data from silently appearing reliable.
+The current configuration uses the source event update timestamp. A separate ingestion timestamp is recommended for measuring actual pipeline execution latency.
 
-Important: These thresholds monitor source update timestamps, not necessarily pipeline execution timestamps. A separate operational ingestion timestamp is recommended for measuring actual pipeline latency.
+9.2 Staging model
 
-9.5 Staging model — "earthquake.sql"
+File: "earthquake.sql"
 
-The staging model standardizes raw USGS attributes into consistent analytical field names and data types.
-
-Key transformations include:
-
-- Event ID standardization.
-- Magnitude conversion.
-- Timestamp conversion.
-- Alert and status normalization.
-- Station metric extraction.
-- Geometry attribute selection.
+The staging model standardizes raw USGS attributes into consistent analytical fields.
 
 Representative SQL:
 
@@ -608,6 +554,7 @@ cleaned_eq as (
 
     select
         cast(id as string) as earthquake_id,
+
         cast(properties_type as string) as event_type,
 
         safe_cast(properties_mag as float64) as magnitude,
@@ -618,7 +565,9 @@ cleaned_eq as (
         ) as magnitude_type,
 
         cast(properties_place as string) as place_description,
+
         cast(properties_title as string) as event_title,
+
         cast(properties_status as string) as review_status,
 
         timestamp_millis(
@@ -629,23 +578,45 @@ cleaned_eq as (
             safe_cast(properties_updated as int64)
         ) as updated_timestamp,
 
-        safe_cast(properties_felt as int64) as total_felt_reports,
-        safe_cast(properties_cdi as float64) as max_reported_intensity,
-        safe_cast(properties_mmi as float64) as instrumental_intensity,
+        safe_cast(properties_felt as int64)
+            as total_felt_reports,
 
-        cast(properties_alert as string) as alert_level,
-        safe_cast(properties_tsunami as int64) as has_tsunami_risk,
-        safe_cast(properties_sig as int64) as significance_score,
+        safe_cast(properties_cdi as float64)
+            as max_reported_intensity,
 
-        cast(properties_net as string) as network_id,
-        cast(properties_code as string) as network_event_code,
+        safe_cast(properties_mmi as float64)
+            as instrumental_intensity,
 
-        safe_cast(properties_nst as int64) as total_stations_used,
-        safe_cast(properties_dmin as float64) as min_station_distance,
-        safe_cast(properties_rms as float64) as rms_travel_time,
-        safe_cast(properties_gap as float64) as azimuthal_gap,
+        cast(properties_alert as string)
+            as alert_level,
 
-        cast(geometry_type as string) as geometry_type,
+        safe_cast(properties_tsunami as int64)
+            as has_tsunami_risk,
+
+        safe_cast(properties_sig as int64)
+            as significance_score,
+
+        cast(properties_net as string)
+            as network_id,
+
+        cast(properties_code as string)
+            as network_event_code,
+
+        safe_cast(properties_nst as int64)
+            as total_stations_used,
+
+        safe_cast(properties_dmin as float64)
+            as min_station_distance,
+
+        safe_cast(properties_rms as float64)
+            as rms_travel_time,
+
+        safe_cast(properties_gap as float64)
+            as azimuthal_gap,
+
+        cast(geometry_type as string)
+            as geometry_type,
+
         geometry_coordinates as coordinates_array
 
     from raw_source
@@ -655,38 +626,32 @@ cleaned_eq as (
 select *
 from cleaned_eq
 
-Why use safe casting?
+Why safe casting?
 
-A regular cast can fail when a source value is malformed or incompatible with the expected data type.
+"SAFE_CAST" returns NULL when a value cannot be converted to the expected type, rather than failing the entire query.
 
-Safe casting returns NULL for incompatible values, allowing the transformation to continue while exposing invalid values for data-quality checks.
+This helps isolate malformed values for further data-quality investigation.
 
-Missing measurements should not automatically be converted to zero. A missing magnitude is not equivalent to a magnitude of zero.
+Missing measurements should not automatically be converted to zero because a missing magnitude is not equivalent to a magnitude of zero.
 
-9.6 Intermediate enrichment model
+9.3 Intermediate enrichment
 
 File: "int_earthquake_enriched.sql"
 
-The intermediate model centralizes geographical parsing, duplicate selection, event categorization, and analytical enrichment.
-
-Why an intermediate layer?
-
-Complex business logic should not be independently repeated across multiple marts.
-
-Centralizing it improves consistency, maintainability, and downstream model reuse.
+The intermediate model centralizes geographical extraction, duplicate handling, event categorization, and analytical enrichment.
 
 Key transformations:
 
-Transformation| Business purpose
-Longitude extraction| Geographic visualization
-Latitude extraction| Geographic visualization
-Depth extraction| Earthquake depth analysis
-Window functions| Duplicate event handling
-Magnitude classification| Event severity segmentation
-Depth classification| Seismic depth analysis
-Event time extraction| Temporal analysis
-Risk profile flags| Analytical risk segmentation
-Reporting delay| Event update timing analysis
+Transformation| Analytical purpose
+Longitude extraction| Geographical visualization
+Latitude extraction| Geographical visualization
+Depth extraction| Depth analysis
+Window functions| Duplicate selection
+Magnitude classification| Event segmentation
+Depth classification| Depth categorization
+Event time extraction| Temporal reporting
+Risk profile flags| Analytical segmentation
+Reporting delay| Update timing analysis
 
 Representative SQL:
 
@@ -756,7 +721,8 @@ insights as (
             else 'Deep (> 300 km)'
         end as depth_category,
 
-        extract(hour from event_timestamp) as event_hour,
+        extract(hour from event_timestamp)
+            as event_hour,
 
         extract(dayofweek from event_timestamp)
             as event_day_of_week,
@@ -789,79 +755,76 @@ insights as (
 select *
 from insights
 
-Why window functions?
+Implementation note: The coordinate extraction shown above assumes "coordinates_array" is stored in a JSON-compatible representation. If the BigQuery column is an actual repeated array, use the appropriate array indexing syntax instead of "JSON_VALUE".
 
-"ROW_NUMBER()" allows the transformation to select one preferred record for each earthquake ID.
+Why intermediate modeling?
 
-The latest update timestamp is prioritized so that revised event records can be retained.
+Centralizing complex business logic avoids duplicating transformations across multiple downstream models.
 
-Why business flags?
+The intermediate layer improves consistency, reusability, and maintainability.
 
-Raw measurements are useful for scientific analysis, but categorical fields make reporting easier for stakeholders.
+Analytical classification note
 
-Magnitude classes, depth categories, and analytical risk profiles help users segment events without repeatedly implementing the same SQL logic.
+The "risk_profile_flag" is a project-defined analytical classification based on magnitude and the USGS tsunami flag.
 
-Important: The risk profile is an analytical classification created from magnitude and the USGS tsunami flag. It is not an official USGS warning or a scientifically validated earthquake-danger prediction.
+It is not an official USGS warning, emergency response recommendation, or scientifically validated earthquake-danger prediction.
 
-The country/state field derived from the USGS place description should also be treated as an estimated text attribute rather than authoritative reverse-geocoded geography.
+The geographical country/state attribute parsed from the USGS place description should also be treated as an estimate rather than authoritative reverse-geocoded geography.
 
-9.7 Dimensional and fact marts
+9.4 Dimension and fact marts
 
-The final analytical layer consists of two principal tables.
+"dim_earthquake_location"
 
-Dimension: "dim_earthquake_location"
-
-Purpose: Store geographical and descriptive event attributes.
+Purpose: Store descriptive and geographical event attributes.
 
 Attribute| Purpose
-earthquake_id| Event identifier
-place_description| Source location description
-event_title| Event display name
-geometry_type| GeoJSON geometry type
-longitude| Geographic longitude
-latitude| Geographic latitude
-depth_km| Event depth
-depth_category| Depth classification
-estimated_location_country_or_state| Estimated geographical description
+"earthquake_id"| Event identifier
+"place_description"| Source location description
+"event_title"| Event display name
+"geometry_type"| GeoJSON geometry type
+"longitude"| Geographic longitude
+"latitude"| Geographic latitude
+"depth_km"| Event depth
+"depth_category"| Depth classification
+Estimated location field| Descriptive geographical attribute
 
-Why a dimension table?
-
-Separating descriptive geographical attributes from numerical event measurements makes the analytical model easier to understand and use in geographical reporting.
-
-Fact: "fct_earthquake_events"
+"fct_earthquake_events"
 
 Purpose: Store measurable seismic event attributes and analytical classifications.
 
 Attribute group| Example fields
-Event identifiers| earthquake_id, network_id
-Measurements| magnitude, significance_score
-Alert information| alert_level, risk_profile_flag
-Station information| total_stations_used, azimuthal_gap
-Intensity information| max_reported_intensity, instrumental_intensity
-Temporal attributes| event_timestamp, event_hour, event_month_name
-Operational attributes| updated_timestamp, pipeline_reporting_delay_minutes
+Identifiers| "earthquake_id", "network_id"
+Measurements| "magnitude", "significance_score"
+Alert information| "alert_level", "risk_profile_flag"
+Station information| "total_stations_used", "azimuthal_gap"
+Intensity| "max_reported_intensity", "instrumental_intensity"
+Temporal| "event_timestamp", "event_hour"
+Operational| "updated_timestamp", "pipeline_reporting_delay_minutes"
 
-Why a fact table?
+Why separate dimensions and facts?
 
-The fact model creates a consistent analytical source for aggregations, trends, comparisons, and reporting KPIs.
+Dimensional modeling provides a clear structure for analytical queries and reporting.
 
-9.8 Automated data-quality testing
+Descriptive attributes are separated from measurable event records, making the warehouse easier for BI applications and analysts to consume.
+
+9.5 Data quality testing
 
 File: "marts_test.yml"
 
-The project implements dbt tests to validate important analytical constraints.
+The project uses dbt tests to validate important analytical constraints.
 
 Test| Purpose
-Unique| Prevent duplicate event identifiers
-Not Null| Ensure required attributes are populated
-Accepted Values| Validate predefined classifications
-Relationships| Verify fact-to-dimension referential integrity
+"unique"| Detect duplicate identifiers
+"not_null"| Validate required attributes
+"accepted_values"| Validate predefined categories
+"relationships"| Validate fact-to-dimension integrity
 
-Example:
+Representative YAML:
 
 version: 2
 
 models:
+
   - name: dim_earthquake_location
     description: "Geographical dimension containing earthquake locations."
 
@@ -918,406 +881,308 @@ models:
 
 Why automated testing?
 
-A dashboard can look correct while silently displaying duplicated or incomplete records.
+A dashboard may look correct while displaying incomplete or duplicated records.
 
-Automated tests establish measurable quality requirements before data is consumed by downstream applications.
+Automated tests provide measurable quality requirements before data is consumed by downstream applications.
 
-Additional production-quality tests should cover coordinate ranges, valid magnitude ranges, missing timestamps, and null geographical values.
+Additional recommended checks include coordinate ranges, valid magnitude ranges, missing timestamps, and null geographical attributes.
 
-9.9 dbt Cloud orchestration
+9.6 dbt Cloud execution metrics
 
-Operational property| Project configuration
+Operational property| Recorded value
 Job name| "usgs_analytic_pipeline"
-Platform| dbt Cloud
 Environment| "usgs"
-Recorded completed runs| 84
+Completed runs| 84
 Reported successful runs| 100%
-Reported average execution| Under one minute
+Reported average execution| Under 1 minute
 
-Why dbt Cloud scheduling?
-
-Automated transformation jobs reduce the need for manual SQL execution and help maintain a consistent analytical layer.
-
-The recorded run metrics provide an operational reference for the executions observed during the project's reporting period.
+These are project-reported execution metrics from the observed reporting period, not independently audited production SLAs.
 
 ---
 
-10. Machine Learning — XGBoost & MLflow
+🧠 10. Machine Learning — XGBoost & MLflow
 
-10.1 Objective
+Objective
 
-The project extends analytical reporting with a supervised machine learning classification experiment.
-
-The ML workflow extracts structured seismic attributes from the BigQuery analytical marts, prepares a modeling dataset, trains an XGBoost classifier, and records experiment metadata through MLflow.
+The platform includes a supervised machine learning experiment that extracts analytical attributes from BigQuery, prepares a modeling dataset, trains an XGBoost classifier, and records experiment metadata through MLflow.
 
 Why XGBoost?
 
-XGBoost uses gradient-boosted decision trees and is particularly useful for structured tabular datasets.
+XGBoost is a gradient-boosted decision tree framework suitable for structured tabular datasets.
 
-It supports:
+It supports nonlinear relationships, feature interactions, regularization, and configurable classification objectives.
 
-- Nonlinear relationships.
-- Feature interactions.
-- Efficient model training.
-- Regularization.
-- Configurable classification objectives.
-
-10.2 ML architecture
+ML architecture
 
 flowchart TD
-    A["BigQuery Analytical Marts"] --> B["Python Data Extraction"]
+    A["BigQuery Analytical Marts"] --> B["Python Extraction"]
     B --> C["Feature Engineering"]
     C --> D["Data Cleaning"]
-    D --> E["Stratified Train/Test Split"]
-    E --> F["Feature Scaling"]
-    F --> G["XGBoost Classifier"]
-    G --> H["Model Evaluation"]
-    H --> I["MLflow Tracking"]
+    D --> E["Train / Test Split"]
+    E --> F["XGBoost Classifier"]
+    F --> G["Model Evaluation"]
+    G --> H["MLflow Tracking"]
 
-    I --> J["Parameters"]
-    I --> K["Metrics"]
-    I --> L["Model Artifacts"]
+    H --> I["Parameters"]
+    H --> J["Metrics"]
+    H --> K["Model Artifacts"]
 
-10.3 Dataset preparation
+Dataset configuration
 
-The modeling workflow uses the following analytical attributes:
+The original experiment uses attributes including:
 
-- Depth.
-- Latitude.
-- Longitude.
-- Magnitude.
-- Event hour.
-- Total seismic stations.
-- Azimuthal gap.
-- Additional selected event attributes.
+- Depth
+- Latitude
+- Longitude
+- Magnitude
+- Event hour
+- Total seismic stations
+- Azimuthal gap
+- Additional selected event attributes
 
-The current experiment defines a binary classification target:
+Target definition
+
+The initial experiment defines:
 
 is_high_risk = (df["magnitude"] >= 4.0).astype(int)
 
-This creates two categories:
-
-Target| Classification
+Target| Definition
 0| Magnitude below 4.0
 1| Magnitude equal to or above 4.0
 
-Important modeling limitation:
+Important: Target leakage
 
-Magnitude is also listed among the original input features. Because the target is directly derived from magnitude, including magnitude in the model features causes target leakage.
+The original experiment includes magnitude among its input features, even though the target is directly calculated from magnitude.
 
-A model can simply learn the threshold rule rather than discover an independent predictive relationship.
+This creates target leakage because the model can learn the threshold rule directly from the input rather than discover an independent predictive relationship.
 
-Therefore, the original reported ROC-AUC of 1.0000 and classification metrics of 1.00 must be treated as results from the initial experiment, not evidence of genuine predictive capability.
+Consequently, the initial reported ROC-AUC and classification metrics of 1.00 must not be interpreted as evidence of genuine predictive capability.
 
-10.4 Recommended model validation
+Recommended model improvement
 
-For a meaningful classification experiment:
+For a meaningful evaluation:
 
 1. Remove magnitude from the input features when predicting a magnitude-defined target.
-2. Use chronological train/test splitting when evaluating performance on future events.
-3. Compare against simple baseline classifiers.
+2. Use chronological train/test splitting to evaluate future-event performance.
+3. Compare the model with simple baseline classifiers.
 4. Evaluate precision, recall, F1-score, ROC-AUC, and PR-AUC.
 5. Investigate class imbalance.
-6. Record all experiment configurations in MLflow.
-7. Evaluate whether the chosen features provide useful information beyond the target definition.
+6. Record configurations and metrics through MLflow.
+7. Consider defining a scientifically meaningful future outcome.
 
-A further improvement is to define a scientifically meaningful future outcome and use historical information only to predict that outcome.
+Scope: This is a threshold-based seismic event classification experiment, not earthquake occurrence forecasting, earthquake timing prediction, or an operational early-warning system.
 
-Scope clarification: This project currently demonstrates threshold-based seismic event classification, not earthquake occurrence forecasting, earthquake timing prediction, or an operational early-warning system.
-
-10.5 Initial experiment configuration
+Initial experiment configuration
 
 Parameter| Initial value
 Algorithm| XGBoost Classifier
-n_estimators| 150
-max_depth| 6
-learning_rate| 0.05
+"n_estimators"| 150
+"max_depth"| 6
+"learning_rate"| 0.05
 Training split| 80%
 Testing split| 20%
 Split strategy| Stratified
 Dataset records| 32,675
-Initial feature count| 8
-Experiment tracking| MLflow
-Tracking backend| SQLite
-
-10.6 MLflow experiment tracking
-
-MLflow records experiment parameters, evaluation metrics, and model artifacts.
+Initial features| 8
+Tracking backend| MLflow SQLite
 
 Why MLflow?
 
-Machine learning experiments involve repeated model configurations and evaluation cycles.
+MLflow records experiment configurations and results, making it easier to compare model versions and reproduce earlier experiments.
 
-Without systematic tracking, comparing model performance and reproducing earlier experiments becomes difficult.
+The project uses MLflow for:
 
-MLflow helps maintain:
-
-- Experiment history.
-- Hyperparameter records.
-- Evaluation metrics.
-- Model artifacts.
-- Reproducibility.
-
-The tracking interface also provides a foundation for future model comparison and model registry integration.
+- Experiment history
+- Hyperparameter tracking
+- Evaluation metrics
+- Model artifacts
+- Reproducibility
 
 ---
 
-11. Interactive Analytics Application — Streamlit & Plotly
+📊 11. Interactive Application — Streamlit & Plotly
 
-11.1 Application overview
+Application overview
 
-The platform includes an interactive web application developed using Streamlit and Plotly.
+The platform includes a Streamlit application that queries curated BigQuery dimension and fact marts to provide an interactive view of global seismic activity.
 
-The application queries the curated BigQuery dimension and fact marts to provide a geographical and analytical view of global seismic activity.
-
-Application technology:
-
-- Streamlit.
-- Python.
-- Plotly.
-- Google BigQuery.
-- Streamlit Secrets.
-- Streamlit Community Cloud.
-
-11.2 Application architecture
+Application architecture
 
 flowchart TD
-    A["Streamlit Community Cloud"] --> B["Secure BigQuery Authentication"]
+    A["Streamlit Community Cloud"] --> B["BigQuery Authentication"]
     B --> C["Read Analytical Marts"]
     C --> D["Cached Data Layer"]
-    D --> E["Interactive Sidebar Filters"]
+    D --> E["Interactive Filters"]
 
     E --> F["KPI Cards"]
     E --> G["Global Earthquake Map"]
     E --> H["Plotly Analytics"]
-    E --> I["Event Data Tables"]
+    E --> I["Event Tables"]
 
-11.3 Secure authentication and caching
+Technology components
 
-The application uses Streamlit Secrets to store Google Cloud service account credentials.
+- Streamlit
+- Python
+- Plotly
+- Google BigQuery
+- Streamlit Secrets
+- Streamlit Community Cloud
 
-Example configuration reference:
+Secure authentication
+
+The application uses Streamlit Secrets to manage Google Cloud service account credentials.
+
+Example:
 
 st.secrets["GCP_SA_KEY"]
 
-Data retrieval uses Streamlit caching:
+Credentials are kept outside the source code.
+
+Data caching
 
 @st.cache_data(ttl=3600)
 
+The cache lifetime is one hour.
+
 Why caching?
 
-Repeatedly querying the same analytical tables can increase warehouse consumption and application response times.
+Repeated warehouse queries can increase execution costs and response times.
 
-Caching stores previously retrieved results temporarily, reducing unnecessary query execution and improving the user experience.
+Caching reduces unnecessary repeated retrieval and improves application responsiveness.
 
-The current cache lifetime is one hour.
+Application features
 
-11.4 Interactive features
+Feature| Implementation| Purpose
+Magnitude filtering| Interactive slider| Filter events by magnitude
+Alert filtering| Selection controls| Explore alert categories
+KPI cards| Streamlit metrics| Summarize selected records
+Global map| Latitude and longitude| Explore spatial distribution
+Top 10 locations| Ranking table| Identify frequently reported areas
+Event distribution| Plotly donut chart| Compare event categories
+Alert distribution| Plotly charts| Analyze alert classifications
+Hourly trends| Time-series visualization| Explore hourly activity
+Monthly trends| Temporal charts| Examine historical distributions
 
-Feature| Implementation| User value
-Magnitude filtering| Interactive slider| Isolate selected event intensities
-Alert filtering| Multi-select controls| Investigate alert categories
-KPI monitoring| Streamlit metrics| Summarize seismic activity
-Global map| Latitude/longitude plotting| Explore geographical distribution
-Location ranking| Top 10 location table| Identify frequently reported areas
-Event breakdown| Plotly donut chart| Compare event categories
-Alert distribution| Plotly charts| Explore alert classifications
-Hourly trends| Time-based charts| Identify activity patterns
-Monthly trends| Temporal visualizations| Explore historical distributions
-
-11.5 KPI monitoring
+KPI monitoring
 
 The application presents:
 
-- Total seismic events.
-- Maximum magnitude.
-- Average magnitude.
-- Maximum depth.
-- Average depth.
+- Total seismic events
+- Maximum magnitude
+- Average magnitude
+- Maximum depth
+- Average depth
 
-Why KPI cards?
+Geospatial exploration
 
-KPI cards provide an immediate overview of the selected dataset without requiring users to interpret multiple detailed charts.
+The global map visualizes earthquake event coordinates.
 
-11.6 Geospatial analysis
+Example geographical areas in the project include:
 
-The interactive map uses event coordinates to visualize geographical seismic activity.
+- Fiji region
+- South Sandwich Islands
+- Kermadec Islands
 
-The application also provides a Top 10 location table based on event frequency.
-
-Example geographical areas include:
-
-- Fiji region.
-- South Sandwich Islands.
-- Kermadec Islands.
-
-Why geographical visualization?
-
-Earthquake data has an inherently spatial dimension.
-
-A geographical view helps users understand where events are concentrated and how seismic activity is distributed across different regions.
-
-11.7 Interactive Plotly analytics
-
-The application includes:
-
-Event Type Distribution
-
-A donut chart comparing event types, including earthquakes and other event categories reported by USGS.
-
-Alert Level Distribution
-
-A visual breakdown of available alert categories such as green, yellow, orange, and red.
-
-Hourly Activity
-
-Line or bar charts showing event frequency across hours.
-
-Monthly Activity
-
-Charts showing event counts across monthly periods.
-
-These visualizations support interactive investigation and make analytical patterns easier to communicate.
+The geographical view helps users investigate spatial distributions and areas with higher reported event activity.
 
 ---
 
-12. Executive Business Intelligence — Power BI
+📈 12. Executive Business Intelligence — Power BI
 
-12.1 Reporting objective
+Reporting objective
 
-The project includes an executive-oriented Power BI dashboard connected to the BigQuery analytical marts.
+The platform includes an executive-oriented Power BI dashboard connected to BigQuery analytical marts.
 
-The report translates structured seismic data into business-friendly KPIs, geographical summaries, temporal trends, and analytical risk classifications.
+The dashboard translates structured seismic information into accessible KPIs, geographical summaries, temporal trends, and analytical classifications.
 
-Why Power BI?
-
-While SQL and Python are powerful analytical tools, executive stakeholders often require a visual reporting interface that allows them to explore metrics without writing queries.
-
-Power BI provides:
-
-- Interactive filtering.
-- KPI monitoring.
-- Dimensional analysis.
-- Geographical visualization.
-- Executive reporting.
-- Shareable analytical reports.
-
-12.2 Power BI data architecture
+Power BI architecture
 
 flowchart TD
-    A["BigQuery: dim_earthquake_location"] --> C["Power BI Data Model"]
-    B["BigQuery: fct_earthquake_events"] --> C
+    A["dim_earthquake_location"] --> C["Power BI Data Model"]
+    B["fct_earthquake_events"] --> C
 
-    C --> D["Relationship on earthquake_id"]
+    C --> D["Relationship: earthquake_id"]
     D --> E["Executive Dashboard"]
 
     E --> F["KPI Cards"]
     E --> G["Monthly Trends"]
     E --> H["Global Location Map"]
-    E --> I["Risk & Alert Matrix"]
+    E --> I["Risk and Alert Matrix"]
 
-12.3 Dashboard components
+Dashboard components
 
 A. Executive KPI cards
 
-The dashboard displays:
+- Total earthquake events
+- Average magnitude
+- Average depth
+- Average azimuthal gap
 
-- Total earthquake events.
-- Average magnitude.
-- Average depth.
-- Average azimuthal gap.
+B. Temporal analysis
 
-Why these metrics?
+Monthly event volume provides a view of event frequency across calendar periods.
 
-They provide an immediate summary of the selected event population and its key seismic characteristics.
-
-B. Temporal trend analysis
-
-A monthly earthquake volume chart presents event frequency across calendar months.
-
-Why this matters:
-
-Temporal analysis helps stakeholders compare event distributions over time.
-
-For meaningful seasonal analysis, the reporting model should retain year and month together, rather than aggregating all January records across different years into a single category.
+For meaningful seasonal analysis, year and month should be retained together rather than combining January records from multiple years into one category.
 
 C. Geographical distribution
 
-The geographical reporting layer combines:
+The report uses:
 
-- Latitude.
-- Longitude.
-- Location descriptions.
-- Estimated country/state attributes.
-
-Why geographical analysis?
-
-It provides a visual overview of event distribution and allows users to examine locations with higher reported activity.
+- Latitude
+- Longitude
+- Location descriptions
+- Estimated country/state attributes
 
 D. Risk and alert matrix
 
-The dashboard includes analytical classifications such as:
+The dashboard includes project-defined analytical categories, available USGS alert levels, and significance scores.
 
-- Critical High Risk.
-- Elevated Risk.
-- Standard Monitoring.
-- Available USGS alert categories.
-- Significance scores.
+These categories support analytical investigation and should not be interpreted as official emergency response instructions.
 
-Why this matters:
+Why Power BI?
 
-A structured matrix makes it easier to compare event characteristics and prioritize analytical investigation.
+Power BI allows stakeholders to explore curated warehouse data through interactive reports without writing SQL.
 
-These project-defined categories should not be interpreted as official emergency response instructions.
-
-12.4 Executive reporting value
-
-Power BI serves as the final business intelligence layer, translating warehouse-level analytical models into accessible reporting for stakeholders.
-
-It bridges the gap between technical data processing and business-oriented decision-making.
+It bridges the gap between technical data processing and business-oriented reporting.
 
 ---
 
-13. Data Quality, Reliability & Operational Considerations
+🛡️ 13. Data Quality & Operational Reliability
 
-Reliability is addressed at multiple stages of the platform rather than being treated as a single transformation-level responsibility.
+Reliability is addressed throughout the data lifecycle rather than relying on a single validation step.
 
-Layer| Validation mechanism| Why it matters
-API ingestion| Payload normalization| Standardizes incoming data
-Python processing| Data type and column checks| Detects malformed records
-Deduplication| Existing event ID checks| Prevents duplicate ingestion
-AI recovery| Structured repair validation| Controls automated corrections
-BigQuery| Warehouse schema compatibility| Maintains storage consistency
-dbt source| Freshness monitoring| Detects stale source data
-dbt models| Type standardization| Improves analytical consistency
-dbt tests| Unique, not null, accepted values, relationships| Validates business rules
-ML workflow| Train/test validation| Evaluates model behavior
-Dashboard| Filter and query logic| Supports consistent reporting
+Layer| Validation mechanism| Purpose
+API ingestion| Payload normalization| Standardize incoming data
+Python| Data type and column checks| Detect malformed records
+Deduplication| Existing event ID checks| Reduce duplicate ingestion
+AI recovery| Structured repair validation| Control automated corrections
+BigQuery| Schema compatibility| Maintain storage consistency
+dbt sources| Freshness monitoring| Detect stale data
+dbt models| Type standardization| Improve analytical consistency
+dbt tests| Uniqueness and integrity checks| Validate analytical constraints
+ML workflow| Train/test evaluation| Assess model behavior
+Dashboard| Query and filter logic| Support consistent reporting
 
-Reliability improvements to consider
+Future reliability enhancements
 
-The next engineering iteration can introduce:
-
-- Explicit source schema contracts.
-- Failed-record quarantine tables.
-- Ingestion audit metadata.
-- Retry limits and exponential backoff.
-- Pipeline execution timestamps.
-- Event update handling through BigQuery MERGE.
-- Automated alerting for failed ingestion.
-- Data-quality monitoring across transformation layers.
+- Explicit source schema contracts
+- Failed-record quarantine tables
+- Ingestion audit metadata
+- Retry limits and exponential backoff
+- Pipeline execution timestamps
+- BigQuery "MERGE" for updated events
+- Automated failure notifications
+- Cross-layer data-quality monitoring
 
 Why operational metadata?
 
-Without execution metadata, it is difficult to distinguish an event's original occurrence time, its latest source update time, and the time the platform actually ingested it.
+The original event occurrence time, source update time, and actual platform ingestion time represent different operational events.
 
-Separating these timestamps provides more accurate operational monitoring and latency analysis.
+Recording all three makes it possible to measure ingestion latency and distinguish delayed source updates from pipeline execution failures.
 
 ---
 
-14. Security & Credential Management
-
-Security is incorporated into the deployment and application architecture.
+🔐 14. Security & Credential Management
 
 Component| Security approach
 Google Cloud| Dedicated service account
@@ -1335,16 +1200,12 @@ Security principles
 - Restrict service account access to required resources.
 - Rotate credentials when necessary.
 - Avoid sending unnecessary sensitive data to external AI services.
-- Review AI-generated transformations before execution.
+- Validate AI-generated transformations before execution.
 - Protect Terraform state and its access credentials.
-
-These controls establish a foundation for secure cloud deployment and operational maintenance.
 
 ---
 
-15. Repository Structure
-
-The repository separates infrastructure, ingestion, orchestration, analytical transformations, machine learning, and application reporting.
+📁 15. Repository Structure
 
 USGS-REALTIME-EARTHQUAKE-DATA-PIPELINE/
 │
@@ -1357,7 +1218,6 @@ USGS-REALTIME-EARTHQUAKE-DATA-PIPELINE/
 │
 ├── models/
 │   └── Earthquake_usgs/
-│       │
 │       ├── intermediate/
 │       │   └── int_earthquake_enriched.sql
 │       │
@@ -1386,38 +1246,37 @@ USGS-REALTIME-EARTHQUAKE-DATA-PIPELINE/
 Core file responsibilities
 
 File| Responsibility
-"main.py"| USGS API ingestion, normalization, deduplication, Gemini-assisted recovery
+"main.py"| API ingestion, normalization, deduplication, Gemini-assisted recovery
 "main.tf"| BigQuery infrastructure provisioning
-"providers.tf"| Terraform Google Cloud provider configuration
-"usgs_ingestion.yml"| Scheduled GitHub Actions execution
+"providers.tf"| Terraform Google Cloud provider
+"usgs_ingestion.yml"| GitHub Actions workflow
 "earthquake.sql"| dbt staging transformation
-"int_earthquake_enriched.sql"| Analytical enrichment and business logic
+"int_earthquake_enriched.sql"| Intermediate enrichment
 "dim_earthquake_location.sql"| Geographical dimension
-"fct_earthquake_events.sql"| Seismic event fact table
+"fct_earthquake_events.sql"| Seismic event fact model
 "marts_test.yml"| dbt data-quality tests
 "train_model.py"| XGBoost training and MLflow tracking
-"usgs_python_dashboard.py"| Interactive Streamlit application
+"usgs_python_dashboard.py"| Streamlit application
 "requirements.txt"| Python dependencies
 "dbt_project.yml"| dbt project configuration
 
 ---
 
-16. Deployment & Setup Guide
-
-The following guide describes the main deployment sequence. Exact commands and configuration values should match the current repository implementation.
+🚀 16. Deployment & Setup Guide
 
 Prerequisites
 
-- Python 3.12 or later.
-- Google Cloud account.
-- BigQuery enabled.
-- Google Cloud service account.
-- Terraform CLI and HCP Terraform Cloud configuration, if used.
-- Gemini API key.
-- GitHub repository.
-- dbt Cloud account.
-- Streamlit Community Cloud account.
-- Power BI Desktop.
+- Python 3.12+
+- Google Cloud account
+- BigQuery enabled
+- Google Cloud service account
+- Terraform CLI
+- HCP Terraform Cloud configuration, if used
+- Gemini API key
+- GitHub account
+- dbt Cloud account
+- Streamlit Community Cloud account
+- Power BI Desktop
 
 Step 1 — Clone the repository
 
@@ -1425,11 +1284,9 @@ git clone <YOUR_GITHUB_REPOSITORY_URL>
 
 cd USGS-REALTIME-EARTHQUAKE-DATA-PIPELINE
 
-Step 2 — Configure Python
+Step 2 — Create a Python environment
 
 python -m venv venv
-
-Activate the environment:
 
 Windows:
 
@@ -1443,50 +1300,39 @@ Install dependencies:
 
 pip install -r requirements.txt
 
-Step 3 — Configure cloud credentials
+Step 3 — Configure credentials
 
 Configure Google Cloud authentication using a service account with the minimum required permissions.
 
-Set the required environment variables:
+Required configuration:
 
 GCP_SA_KEY
 GEMINI_API_KEY
 
-Do not commit actual credentials or ".env" files to GitHub.
+Do not commit real credentials or ".env" files to the repository.
 
 Step 4 — Provision infrastructure
 
-Initialize Terraform:
-
 terraform init
-
-Validate configuration:
-
 terraform validate
-
-Review the proposed changes:
-
 terraform plan
-
-Apply the reviewed infrastructure configuration:
-
 terraform apply
+
+Review the proposed infrastructure changes before applying them.
 
 Step 5 — Execute ingestion
 
 python main.py
 
-Verify that records are successfully loaded into:
+Verify that records are loaded into:
 
 Earthquake_raw.raw_usgs_data
 
 Step 6 — Configure dbt
 
-Configure the BigQuery connection in the dbt Cloud environment.
+Configure the BigQuery connection in dbt Cloud.
 
-Execute the transformation and validation workflow using the configured project and job.
-
-Typical dbt commands:
+Typical validation and execution commands:
 
 dbt debug
 dbt source freshness
@@ -1497,121 +1343,124 @@ Step 7 — Train the ML model
 
 python ML/train_model.py
 
-Verify the experiment parameters, metrics, and model artifacts in MLflow.
+Verify experiment parameters, metrics, and artifacts in MLflow.
 
-Step 8 — Launch the Streamlit application
+Step 8 — Launch Streamlit
 
 streamlit run usgs_python_dashboard.py
 
-Configure Streamlit Cloud deployment using the repository and the required secrets.
+Configure the deployed application with the required Streamlit Secrets.
 
 Step 9 — Configure Power BI
 
 Connect Power BI to the BigQuery analytical marts.
 
-Configure the relationship between the dimension and fact tables using "earthquake_id", then validate the report's filters, measures, and visualizations.
+Configure and validate the relationship between the dimension and fact tables using "earthquake_id".
 
 ---
 
-17. Project Performance & Recorded Metrics
+📊 17. Project Performance & Recorded Metrics
 
-The following metrics describe the project's reported implementation and execution history.
+The following values represent the reported implementation and execution history.
 
 Metric| Recorded value
-Historical dataset records used in ML| 32,675
+Historical ML dataset records| 32,675
 Initial ML feature attributes| 8
 XGBoost estimators| 150
-dbt completed job runs| 84
+Completed dbt runs| 84
 Reported dbt success rate| 100%
-Reported average dbt build duration| Under 1 minute
-Source freshness warning threshold| 5 days
-Source freshness error threshold| 10 days
-Application cache lifetime| 1 hour
+Average dbt execution| Under 1 minute
+Source freshness warning| 5 days
+Source freshness error| 10 days
+Streamlit cache lifetime| 1 hour
 
-ML evaluation note: The initial reported ROC-AUC and classification metrics of 1.00 are not presented as validated predictive performance because the original experiment contains target leakage. A leakage-free evaluation is required before publishing corrected performance metrics.
+ML evaluation qualification: The original experiment reported ROC-AUC and classification metrics of 1.00. Because the target is derived from magnitude and magnitude was included among the input features, those metrics are not validated predictive results.
 
-These measurements are project-reported results, not independently audited production SLAs.
+A leakage-free evaluation is required before publishing corrected performance metrics.
+
+These are project-reported measurements, not independently audited production SLAs.
 
 ---
 
-18. Engineering Challenges & Solutions
+🧩 18. Engineering Challenges & Solutions
 
-Engineering challenge| Implemented approach| Why it matters
-Semi-structured GeoJSON| Pandas normalization| Converts API payloads into usable records
-Nested geographical arrays| JSON serialization and coordinate extraction| Supports storage and spatial analysis
+Challenge| Implemented approach| Engineering value
+Semi-structured GeoJSON| Pandas normalization| Converts API payloads into tabular data
+Nested geographical arrays| JSON handling and coordinate extraction| Supports spatial analysis
 Duplicate API responses| BigQuery event ID verification| Protects aggregate accuracy
-Schema incompatibilities| Gemini-assisted diagnosis and repair| Reduces manual debugging
-Inconsistent analytical fields| dbt staging models| Establishes standardized definitions
-Complex business logic| Intermediate SQL models| Avoids duplicated transformations
+Schema incompatibilities| Gemini-assisted diagnosis| Reduces manual troubleshooting
+Inconsistent analytical fields| dbt staging models| Establishes standard definitions
+Complex business logic| Intermediate SQL models| Improves transformation reuse
 Data integrity| dbt automated tests| Detects analytical inconsistencies
-Repeated warehouse queries| Streamlit caching| Reduces unnecessary data retrieval
-Experiment reproducibility| MLflow| Maintains model experiment history
-Executive data consumption| Power BI| Makes analytics accessible to stakeholders
+Repeated warehouse queries| Streamlit caching| Reduces unnecessary retrieval
+Experiment reproducibility| MLflow| Maintains model history
+Executive reporting| Power BI| Makes analytics accessible
 
 ---
 
-19. Limitations & Future Engineering Roadmap
+🛣️ 19. Limitations & Future Roadmap
 
-The current architecture provides a foundation for further development. Several improvements can extend its scalability, reliability, and analytical capabilities.
+The current implementation establishes a foundation for further engineering improvements.
 
 Area| Future enhancement| Expected benefit
-Streaming ingestion| Google Pub/Sub + Dataflow| Lower-latency event processing
+Streaming ingestion| Google Pub/Sub + Dataflow| Lower-latency processing
 Cloud execution| Cloud Run| Managed ingestion execution
 Orchestration| Cloud Composer / Airflow| Advanced dependency management
-Data modeling| Incremental dbt models| More efficient processing as data grows
+Data modeling| Incremental dbt models| More efficient transformations
 Schema management| Versioned schema contracts| Safer schema evolution
-AI recovery| Validated repair policies and audit history| More controlled automation
-Data quality| Great Expectations or additional dbt tests| Broader validation coverage
+AI recovery| Validated repair policies| Controlled automation
+Data quality| Additional dbt tests / Great Expectations| Broader validation
 Machine learning| Leakage-free temporal evaluation| More meaningful model assessment
-ML operations| MLflow Model Registry| Centralized model lifecycle management
-Monitoring| Cloud Logging and alerting| Improved operational visibility
-Infrastructure| Terraform modules and remote state controls| Better infrastructure governance
-Data storage| Partitioning and clustering| More efficient warehouse queries
+MLOps| MLflow Model Registry| Model lifecycle management
+Monitoring| Cloud Logging and alerting| Better operational visibility
+Infrastructure| Terraform modules and remote state| Infrastructure governance
+Warehouse optimization| Partitioning and clustering| More efficient queries
 
-Long-term architectural direction
+Long-term architecture
 
-The future architecture can evolve from scheduled batch ingestion into an event-driven data processing platform.
-
-A possible extension:
+The next architectural iteration can evolve from scheduled batch ingestion toward event-driven processing.
 
 flowchart TD
-    A["USGS Event API"] --> B["Cloud Run Ingestion Service"]
+    A["USGS Event API"] --> B["Cloud Run Ingestion"]
     B --> C["Google Pub/Sub"]
     C --> D["Dataflow Processing"]
     D --> E["BigQuery Raw Layer"]
-    E --> F["dbt Transformation"]
+    E --> F["dbt Transformations"]
     F --> G["Analytical Marts"]
+
     G --> H["MLflow + ML Models"]
     G --> I["Streamlit"]
     G --> J["Power BI"]
+
     K["Cloud Monitoring"] --> B
     K --> C
     K --> D
 
-Why evolve toward event-driven processing?
+This is a proposed future architecture, not the current implementation.
 
-Scheduled batch processing is appropriate for periodic data extraction, but event-driven architecture can reduce processing latency and improve responsiveness when incoming events need to be processed more frequently.
+Why event-driven processing?
 
-This is a future architectural direction, not a description of the current GitHub Actions implementation.
+Scheduled batch processing is appropriate for periodic data collection. Event-driven processing can reduce latency and improve responsiveness when events need to be processed more frequently.
 
 ---
 
-20. Business & Analytical Impact
+💼 20. Business & Analytical Value
 
 The platform is designed to convert publicly available seismic telemetry into structured and accessible analytical information.
 
-Its value is not limited to collecting earthquake records.
+Its value extends beyond collecting earthquake records.
 
-It provides a complete workflow for:
+It provides an integrated workflow for:
 
-- Centralizing seismic event information.
-- Standardizing geographical and numerical attributes.
-- Improving ingestion resilience.
-- Monitoring source freshness and data integrity.
-- Segmenting events using analytical classifications.
-- Exploring geographical activity patterns.
-- Tracking machine learning experiments.
-- Communicating findings through interactive reports.
+- Centralizing seismic event information
+- Standardizing geographical and numerical attributes
+- Improving ingestion resilience
+- Monitoring source freshness
+- Validating analytical data quality
+- Segmenting events through defined classifications
+- Exploring geographical activity patterns
+- Tracking machine learning experiments
+- Communicating findings through interactive reporting
 
 Stakeholder value
 
@@ -1619,83 +1468,104 @@ Stakeholder| Potential value
 Data Engineers| Automated ingestion and cloud infrastructure
 Analytics Engineers| Modular dbt transformations and tested marts
 Data Analysts| Query-ready seismic datasets
-Researchers| Geographical and temporal event exploration
-Business stakeholders| Executive KPIs and analytical reporting
+Researchers| Geographical and temporal exploration
+Business stakeholders| Executive KPIs and reporting
 ML practitioners| Structured feature datasets and experiment tracking
 
-Important: This is an analytical monitoring and research platform. It does not replace official earthquake early-warning systems, geological hazard assessments, or emergency response authorities.
+Scope limitation: This is an analytical monitoring and research platform. It does not replace official earthquake early-warning systems, geological hazard assessments, or emergency response authorities.
 
 ---
 
-21. Data Source & References
+📚 21. Data Sources & Technical References
 
-Primary data provider: United States Geological Survey (USGS)
+Primary data provider
 
-- USGS Earthquake Hazards Program: https://earthquake.usgs.gov/
-- USGS FDSN Event Web Service: https://earthquake.usgs.gov/fdsnws/event/1/
-- USGS Earthquake GeoJSON Feed: https://earthquake.usgs.gov/earthquakes/feed/v1.0/geojson.php
+United States Geological Survey (USGS)
 
-Technology documentation:
+- "USGS Earthquake Hazards Program" (https://earthquake.usgs.gov/)
+- "USGS FDSN Event Web Service" (https://earthquake.usgs.gov/fdsnws/event/1/)
+- "USGS GeoJSON Feeds" (https://earthquake.usgs.gov/earthquakes/feed/v1.0/geojson.php)
 
-- Google BigQuery: https://cloud.google.com/bigquery/docs
-- Terraform Google Provider: https://registry.terraform.io/providers/hashicorp/google/latest/docs
-- Gemini API: https://ai.google.dev/gemini-api/docs
-- dbt Documentation: https://docs.getdbt.com/
-- GitHub Actions: https://docs.github.com/actions
-- XGBoost: https://xgboost.readthedocs.io/
-- MLflow: https://mlflow.org/docs/latest/
-- Streamlit: https://docs.streamlit.io/
-- Plotly: https://plotly.com/python/
-- Power BI: https://learn.microsoft.com/power-bi/
+Technology documentation
+
+- "Google BigQuery" (https://cloud.google.com/bigquery/docs)
+- "Terraform Google Provider" (https://registry.terraform.io/providers/hashicorp/google/latest/docs)
+- "Gemini API" (https://ai.google.dev/gemini-api/docs)
+- "dbt Documentation" (https://docs.getdbt.com/)
+- "GitHub Actions" (https://docs.github.com/actions)
+- "XGBoost" (https://xgboost.readthedocs.io/)
+- "MLflow" (https://mlflow.org/docs/latest/)
+- "Streamlit" (https://docs.streamlit.io/)
+- "Plotly" (https://plotly.com/python/)
+- "Power BI" (https://learn.microsoft.com/power-bi/)
 
 ---
 
-22. Project Links & Visual Demonstration
+🖥️ 22. Project Links & Visual Demonstration
 
 Resource| Link
-GitHub Repository| "Add repository URL" (YOUR_GITHUB_REPOSITORY_URL)
-Live Streamlit Application| "Add deployed application URL" (YOUR_STREAMLIT_APP_URL)
-Power BI Report| "Add published report URL, if available" (YOUR_POWER_BI_REPORT_URL)
-Architecture Diagram| "Add diagram URL, if available" (YOUR_ARCHITECTURE_DIAGRAM_URL)
+GitHub Repository| Add your repository URL
+Live Streamlit Application| Add deployed application URL
+Power BI Report| Add published report URL, if available
+Architecture Diagram| Add diagram URL, if available
 
 Application screenshots
 
-Add actual screenshots from the deployed application and reporting environment.
+Create the following directory in your repository:
+
+docs/
+└── images/
+    ├── streamlit_dashboard.png
+    ├── powerbi_dashboard.png
+    ├── mlflow_experiments.png
+    └── architecture.png
 
 Streamlit — Global Seismic Monitoring
 
-"![Streamlit Dashboard](docs/images/streamlit_dashboard.png)"
+"Streamlit Dashboard" (docs/images/streamlit_dashboard.png)
 
 Power BI — Executive Analytics
 
-"![Power BI Dashboard](docs/images/powerbi_dashboard.png)"
+"Power BI Dashboard" (docs/images/powerbi_dashboard.png)
 
 MLflow — Experiment Tracking
 
-"![MLflow Experiments](docs/images/mlflow_experiments.png)"
+"MLflow Experiments" (docs/images/mlflow_experiments.png)
 
-Note: Replace these references with real screenshots and ensure the image files exist in the repository.
+Platform Architecture
+
+"Architecture Diagram" (docs/images/architecture.png)
+
+Replace these image paths with actual screenshots committed to the repository. Until those files exist, GitHub will display broken image references.
 
 ---
 
-23. Conclusion
+🎯 23. Conclusion
 
-The USGS Global Seismic Intelligence Platform demonstrates an integrated approach to modern cloud-native data engineering and analytics.
+The USGS Global Seismic Intelligence Platform demonstrates an integrated approach to modern cloud data engineering and analytics.
 
-By combining Terraform-based infrastructure provisioning, Python ingestion, Gemini-assisted recovery, BigQuery warehousing, dbt analytics engineering, XGBoost experimentation, MLflow tracking, Streamlit application development, and Power BI reporting, the project establishes a complete data lifecycle from source extraction to decision-oriented analytics.
+It combines Terraform-based infrastructure provisioning, Python ingestion, Gemini-assisted recovery, BigQuery warehousing, dbt analytics engineering, XGBoost experimentation, MLflow tracking, Streamlit application development, and Power BI reporting.
 
 The architecture emphasizes modularity, automation, data quality, maintainability, and responsible AI integration.
 
-More importantly, it demonstrates how independent technologies can work together to solve a practical data processing and analytical problem.
+More importantly, the project demonstrates how multiple engineering disciplines can work together to transform an external data source into a structured analytical platform.
 
 The ultimate objective is to transform raw global seismic telemetry into reliable, structured, and accessible intelligence.
 
 ---
 
-Author & Project Ownership
+👨‍💻 Author & Project Ownership
 
 Developed as an independent end-to-end data engineering and analytics project.
 
-Technologies: Python | SQL | Terraform | Google Cloud | BigQuery | Gemini AI | dbt | GitHub Actions | XGBoost | MLflow | Streamlit | Plotly | Power BI
+Technology stack:
+
+Python | SQL | Terraform | Google Cloud | BigQuery | Gemini AI | dbt | GitHub Actions | XGBoost | MLflow | Streamlit | Plotly | Power BI
 
 Built to explore the intersection of Data Engineering, Analytics Engineering, AI-assisted automation, Machine Learning, and Business Intelligence.
+
+---
+
+<p align="center">
+  <b>From Raw Seismic Data to Analytical Intelligence.</b>
+</p>
