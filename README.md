@@ -144,6 +144,7 @@ A scheduled workflow provisions an ephemeral runner, installs dependencies, and 
 - **Runner environment:** `ubuntu-latest` ephemeral virtual machine.
 - **Secure setup:** Python 3.12 runtime with requirements installation.
 - **Autonomous run:** main.py injected with `GCP_SA_KEY` and `GEMINI_API_KEY` secrets.
+<img width="1917" height="786" alt="Screenshot 2026-11-05 100708" src="https://github.com/user-attachments/assets/a571b077-8976-45c3-9296-324cd3ca0a2e" />
 
 <img width="1896" height="946" alt="Screenshot 2026-11-05 100744" src="https://github.com/user-attachments/assets/fa06f01a-0b99-4dd0-b35e-e8e4b9f61a1b" />
 **Operational rationale:**
