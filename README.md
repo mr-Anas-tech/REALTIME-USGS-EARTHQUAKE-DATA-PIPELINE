@@ -2,26 +2,18 @@
 
 End-to-End Cloud Data Engineering | Analytics Engineering | AI-Assisted Pipeline Recovery | Machine Learning | Business Intelligence
 
-<p align="left">
-  <img src="https://img.shields.io/badge/Python-3.12+-3776AB?logo=python&logoColor=white" alt="Python"/>
-  <img src="https://img.shields.io/badge/Google%20BigQuery-Data%20Warehouse-4285F4?logo=googlebigquery&logoColor=white" alt="BigQuery"/>
-  <img src="https://img.shields.io/badge/Terraform-Infrastructure%20as%20Code-844FBA?logo=terraform&logoColor=white" alt="Terraform"/>
-  <img src="https://img.shields.io/badge/dbt-Analytics%20Engineering-FF694B?logo=dbt&logoColor=white" alt="dbt"/>
-  <img src="https://img.shields.io/badge/Gemini-AI%20Recovery-8E75B2?logo=googlegemini&logoColor=white" alt="Gemini"/>
-  <img src="https://img.shields.io/badge/XGBoost-Machine%20Learning-EC6B23" alt="XGBoost"/>
-  <img src="https://img.shields.io/badge/MLflow-Experiment%20Tracking-0194E2?logo=mlflow&logoColor=white" alt="MLflow"/>
-  <img src="https://img.shields.io/badge/Streamlit-Web%20Application-FF4B4B?logo=streamlit&logoColor=white" alt="Streamlit"/>
-  <img src="https://img.shields.io/badge/Power%20BI-Business%20Intelligence-F2C811?logo=powerbi&logoColor=black" alt="Power BI"/>
-</p>---
+Technology stack: Python · Google Cloud · BigQuery · Terraform · Gemini 2.5 Flash · dbt · XGBoost · MLflow · Streamlit · Plotly · Power BI
+
+---
 
 📌 1. Project Overview
 
-The USGS Global Seismic Intelligence Platform is an end-to-end cloud-native data engineering and analytics solution designed to collect, process, transform, and analyze global earthquake telemetry from the United States Geological Survey (USGS).
+The USGS Global Seismic Intelligence Platform is an end-to-end cloud-based data engineering and analytics solution designed to collect, process, transform, and analyze earthquake telemetry published by the United States Geological Survey (USGS).
 
 The platform transforms semi-structured GeoJSON earthquake records into structured, analytics-ready datasets through an integrated architecture combining:
 
 - Infrastructure as Code (Terraform)
-- Automated Python-based data ingestion
+- Python-based data ingestion
 - Google BigQuery data warehousing
 - Gemini-powered AI-assisted recovery
 - dbt analytics engineering
@@ -38,11 +30,11 @@ A conventional API-to-dashboard implementation does not adequately address these
 
 This project explores a more resilient approach by introducing an AI-assisted recovery mechanism that uses Gemini 2.5 Flash to analyze ingestion errors and propose structured data corrections.
 
-The proposed corrections are validated through deterministic application logic before being applied.
+Proposed corrections are validated through deterministic application logic before they are applied.
 
 What does the platform deliver?
 
-Engineering area| Implementation| Outcome
+Engineering Area| Implementation| Outcome
 Infrastructure| Terraform + GCP| Reproducible cloud resources
 Data ingestion| Python + Pandas| Automated API extraction
 Data warehouse| Google BigQuery| Centralized analytical storage
@@ -113,14 +105,14 @@ Independent consumption: Machine learning, Streamlit, and Power BI consume curat
 
 ☁️ 3. Technology Stack
 
-Technology| Responsibility| Why it is used
+Technology| Responsibility| Why It Is Used
 Python 3.12+| Data ingestion| API integration and data processing
 Pandas| Data normalization| Converts nested JSON into tabular records
 pandas-gbq| BigQuery loading| Transfers DataFrames into BigQuery
 Google Cloud| Cloud infrastructure| Managed cloud environment
 BigQuery| Data warehouse| Scalable analytical SQL processing
 Terraform| Infrastructure as Code| Declarative resource provisioning
-HCP Terraform Cloud| Terraform execution| Centralized infrastructure workflows
+HCP Terraform Cloud| Terraform execution| Centralized infrastructure workflows, where configured
 Gemini 2.5 Flash| AI-assisted recovery| Diagnoses data compatibility errors
 GitHub Actions| Automation| Scheduled and manually triggered execution
 dbt Cloud| Analytics engineering| Modular SQL transformations and tests
@@ -135,7 +127,7 @@ Power BI| Business intelligence| Executive analytics and reporting
 
 🌎 4. Data Source — USGS Earthquake API
 
-Primary provider: United States Geological Survey
+Primary provider: United States Geological Survey (USGS)
 
 API documentation:
 https://earthquake.usgs.gov/fdsnws/event/1/
@@ -147,7 +139,7 @@ The ingestion engine retrieves earthquake events through the USGS FDSN Event Web
 
 Extraction parameters
 
-The current implementation uses:
+The current implementation uses the following extraction configuration:
 
 Parameter| Purpose
 "starttime"| Beginning of extraction window
@@ -210,7 +202,7 @@ Location| "US"| BigQuery multi-region
 
 Terraform implementation
 
-main.tf
+File: "main.tf"
 
 resource "google_bigquery_dataset" "Earthquake_raw" {
   dataset_id                 = "Earthquake_raw"
@@ -226,7 +218,7 @@ resource "google_bigquery_table" "raw_usgs_data" {
   deletion_protection = false
 }
 
-providers.tf
+File: "providers.tf"
 
 The Google Terraform provider connects infrastructure execution to the target GCP project, using the configured Google provider version constraint of "~> 5.0".
 
@@ -298,7 +290,7 @@ Future improvement: Use an event ID and source update timestamp with a BigQuery 
 
 ---
 
-🤖 7. AI-Assisted Self-Healing Pipeline — Gemini 2.5 Flash
+🤖 7. AI-Assisted Pipeline Recovery — Gemini 2.5 Flash
 
 The problem
 
@@ -591,7 +583,7 @@ cleaned_eq as (
             as alert_level,
 
         safe_cast(properties_tsunami as int64)
-            as has_tsunami_risk,
+            as tsunami_flag,
 
         safe_cast(properties_sig as int64)
             as significance_score,
@@ -642,7 +634,7 @@ The intermediate model centralizes geographical extraction, duplicate handling, 
 
 Key transformations:
 
-Transformation| Analytical purpose
+Transformation| Analytical Purpose
 Longitude extraction| Geographical visualization
 Latitude extraction| Geographical visualization
 Depth extraction| Depth analysis
@@ -737,10 +729,10 @@ insights as (
         ) as pipeline_reporting_delay_minutes,
 
         case
-            when has_tsunami_risk = 1 and magnitude >= 6.0
+            when tsunami_flag = 1 and magnitude >= 6.0
                 then 'Critical High Risk'
 
-            when has_tsunami_risk = 1 or magnitude >= 5.0
+            when tsunami_flag = 1 or magnitude >= 5.0
                 then 'Elevated Risk'
 
             else 'Standard Monitoring'
@@ -755,7 +747,7 @@ insights as (
 select *
 from insights
 
-Implementation note: The coordinate extraction shown above assumes "coordinates_array" is stored in a JSON-compatible representation. If the BigQuery column is an actual repeated array, use the appropriate array indexing syntax instead of "JSON_VALUE".
+Implementation note: The coordinate extraction above assumes "coordinates_array" is stored in a JSON-compatible representation. If the BigQuery column is an actual repeated array, use the appropriate array indexing syntax instead of "JSON_VALUE".
 
 Why intermediate modeling?
 
@@ -792,7 +784,7 @@ Estimated location field| Descriptive geographical attribute
 
 Purpose: Store measurable seismic event attributes and analytical classifications.
 
-Attribute group| Example fields
+Attribute Group| Example Fields
 Identifiers| "earthquake_id", "network_id"
 Measurements| "magnitude", "significance_score"
 Alert information| "alert_level", "risk_profile_flag"
@@ -889,7 +881,7 @@ Additional recommended checks include coordinate ranges, valid magnitude ranges,
 
 9.6 dbt Cloud execution metrics
 
-Operational property| Recorded value
+Operational Property| Recorded Value
 Job name| "usgs_analytic_pipeline"
 Environment| "usgs"
 Completed runs| 84
@@ -974,7 +966,7 @@ Scope: This is a threshold-based seismic event classification experiment, not ea
 
 Initial experiment configuration
 
-Parameter| Initial value
+Parameter| Initial Value
 Algorithm| XGBoost Classifier
 "n_estimators"| 150
 "max_depth"| 6
@@ -1151,7 +1143,7 @@ It bridges the gap between technical data processing and business-oriented repor
 
 Reliability is addressed throughout the data lifecycle rather than relying on a single validation step.
 
-Layer| Validation mechanism| Purpose
+Layer| Validation Mechanism| Purpose
 API ingestion| Payload normalization| Standardize incoming data
 Python| Data type and column checks| Detect malformed records
 Deduplication| Existing event ID checks| Reduce duplicate ingestion
@@ -1184,7 +1176,7 @@ Recording all three makes it possible to measure ingestion latency and distingui
 
 🔐 14. Security & Credential Management
 
-Component| Security approach
+Component| Security Approach
 Google Cloud| Dedicated service account
 GitHub Actions| Encrypted repository secrets
 Gemini| API key stored outside source code
@@ -1284,6 +1276,8 @@ git clone <YOUR_GITHUB_REPOSITORY_URL>
 
 cd USGS-REALTIME-EARTHQUAKE-DATA-PIPELINE
 
+Replace the placeholder with the actual repository URL.
+
 Step 2 — Create a Python environment
 
 python -m venv venv
@@ -1363,7 +1357,7 @@ Configure and validate the relationship between the dimension and fact tables us
 
 The following values represent the reported implementation and execution history.
 
-Metric| Recorded value
+Metric| Recorded Value
 Historical ML dataset records| 32,675
 Initial ML feature attributes| 8
 XGBoost estimators| 150
@@ -1384,7 +1378,7 @@ These are project-reported measurements, not independently audited production SL
 
 🧩 18. Engineering Challenges & Solutions
 
-Challenge| Implemented approach| Engineering value
+Challenge| Implemented Approach| Engineering Value
 Semi-structured GeoJSON| Pandas normalization| Converts API payloads into tabular data
 Nested geographical arrays| JSON handling and coordinate extraction| Supports spatial analysis
 Duplicate API responses| BigQuery event ID verification| Protects aggregate accuracy
@@ -1402,7 +1396,7 @@ Executive reporting| Power BI| Makes analytics accessible
 
 The current implementation establishes a foundation for further engineering improvements.
 
-Area| Future enhancement| Expected benefit
+Area| Future Enhancement| Expected Benefit
 Streaming ingestion| Google Pub/Sub + Dataflow| Lower-latency processing
 Cloud execution| Cloud Run| Managed ingestion execution
 Orchestration| Cloud Composer / Airflow| Advanced dependency management
@@ -1464,7 +1458,7 @@ It provides an integrated workflow for:
 
 Stakeholder value
 
-Stakeholder| Potential value
+Stakeholder| Potential Value
 Data Engineers| Automated ingestion and cloud infrastructure
 Analytics Engineers| Modular dbt transformations and tested marts
 Data Analysts| Query-ready seismic datasets
@@ -1504,10 +1498,10 @@ Technology documentation
 🖥️ 22. Project Links & Visual Demonstration
 
 Resource| Link
-GitHub Repository| Add your repository URL
-Live Streamlit Application| Add deployed application URL
-Power BI Report| Add published report URL, if available
-Architecture Diagram| Add diagram URL, if available
+GitHub Repository| Add your actual repository URL
+Live Streamlit Application| Add your deployed application URL
+Power BI Report| Add your published report URL, if available
+Architecture Diagram| Add your diagram URL, if available
 
 Application screenshots
 
@@ -1520,23 +1514,25 @@ docs/
     ├── mlflow_experiments.png
     └── architecture.png
 
+Once the screenshots have been committed, add these image references to the README:
+
 Streamlit — Global Seismic Monitoring
 
-"Streamlit Dashboard" (docs/images/streamlit_dashboard.png)
+![Streamlit Dashboard](docs/images/streamlit_dashboard.png)
 
 Power BI — Executive Analytics
 
-"Power BI Dashboard" (docs/images/powerbi_dashboard.png)
+![Power BI Dashboard](docs/images/powerbi_dashboard.png)
 
 MLflow — Experiment Tracking
 
-"MLflow Experiments" (docs/images/mlflow_experiments.png)
+![MLflow Experiments](docs/images/mlflow_experiments.png)
 
 Platform Architecture
 
-"Architecture Diagram" (docs/images/architecture.png)
+![Platform Architecture](docs/images/architecture.png)
 
-Replace these image paths with actual screenshots committed to the repository. Until those files exist, GitHub will display broken image references.
+Only add these image references after the corresponding image files exist in the repository. Otherwise, GitHub will display broken image references.
 
 ---
 
@@ -1566,6 +1562,4 @@ Built to explore the intersection of Data Engineering, Analytics Engineering, AI
 
 ---
 
-<p align="center">
-  <b>From Raw Seismic Data to Analytical Intelligence.</b>
-</p>
+From Raw Seismic Data to Analytical Intelligence.
