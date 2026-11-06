@@ -199,33 +199,46 @@ The dbt layer transforms semi-structured raw logs into a structured star schema 
 
 ### 7. Interactive Web App (Streamlit and Plotly)
 
-A SOC-style dark-themed analytics dashboard deployed on Streamlit Community Cloud.
+A SOC-style dark-themed analytics dashboard deployed on Streamlit Community Cloud, providing researchers and emergency response teams with real-time visibility into global seismic telemetry.
 
-**Features:**
+**Live Application Screenshot & Insights:**
 
-- Secure BigQuery auth via `st.secrets["GCP_SA_KEY"]`
-- `@st.cache_data(ttl=3600)` caching that reduces BigQuery query costs and provides instant dashboard load times
-- Dynamic filters including magnitude sliders and multi-select alert levels
-- Real-time KPIs showing Total Events, Max and Avg Magnitude, Max and Avg Depth
-- Geospatial map plus a Top-10 high-frequency seismic location table
-- Plotly analytics including donut event-type breakdown, alert distribution, hourly rates, and monthly trend charts
+*(Note: Replace this text with the actual screenshot of your Streamlit app in your repo)*
+
+**Features & Real-Time Insights:**
+
+- **Secure BigQuery Auth:** Secured via `st.secrets["GCP_SA_KEY"]` preventing credential leaks.
+- **High-Performance Caching:** Uses `@st.cache_data(ttl=3600)` to reduce BigQuery query costs and provide instant dashboard load times.
+- **Dynamic Filtering:** Users can slice data via magnitude sliders (0.05 to 7.80) and multi-select alert levels (green, yellow, orange, red).
+- **Real-Time KPI Monitoring:**
+  - **Total Events:** 29,299+ events tracked in the current window.
+  - **Maximum Magnitude:** 7.8
+  - **Average Magnitude:** 3.77
+  - **Average Depth:** 25.75 km
+- **Geospatial & Top Locations:** An interactive global map displaying event points alongside a Top-10 high-frequency seismic location table (e.g., Fiji Islands, South Sandwich Islands, Kermadec Islands).
+- **Plotly Interactive Visuals:**
+  - **Event Type Proportion:** 98.3% Earthquakes vs. other events (Mining explosions, quarry blasts, etc.).
+  - **Alert Level Distribution:** Visualizing the severity proportions.
+  - **Temporal Trends:** Hourly Earthquake Rates (peaking around hours 10-12 and 18-20) and Monthly Event Volume Trends.
 
 ---
 
 ### 8. Executive BI (Power BI)
 
-An executive-grade dashboard connected to the BigQuery star-schema marts.
+An executive-grade dashboard connected to the BigQuery star-schema marts. The report features an executive dark-mode layout, structured KPI metric cards, spatial map breakdowns, and temporal trend analysis.
 
-**Layout components:**
+**Dashboard Insights:**
 
-- **KPI cards:** Total Earthquakes, Avg Depth, Avg Magnitude, Avg Azimuthal Gap.
-- **Temporal trends:** monthly earthquake volume distribution from January through December.
-- **Geospatial map:** latitude and longitude plot with country breakdown.
-- **Risk matrix:** regional risk profiles by alert level and significance score.
+- **Executive Summary KPI Cards:**
+  - **Total Earthquakes:** 32K+ events
+  - **Average Depth:** 33.31 km
+  - **Average Magnitude:** 3.59
+  - **Average Azimuthal Gap:** 130.22
+- **Temporal Trend Analysis:** A column chart illustrating earthquake frequency distribution across months, highlighting October as a significant spike with over 5,000 events.
+- **Geospatial Mapping:** An interactive global map mapping exact latitude and longitude coordinates, pinpointing high-risk fault lines across regions like North America, Europe, and Asia.
+- **Granular Risk & Alert Matrix:** A comprehensive data matrix evaluating regional risk profiles (e.g., Afghanistan, Hubbard Glacier Earthquake) by alert level (green, yellow, etc.) and aggregated significance scores.
 
-**Purpose:** enable stakeholders to filter by severity, identify fault-line hotspots, and deploy emergency resources proactively without writing SQL.
-
----
+**Purpose:** Enables stakeholders to filter by severity, identify fault-line hotspots, and deploy emergency resources proactively without writing SQL.
 
 ## 📂 Repository Structure
 
