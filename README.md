@@ -489,3 +489,42 @@ The application queries production-ready BigQuery data marts (`dim_earthquake_lo
    * Temporal Trends: Interactive line and bar charts tracking Hourly Earthquake Rates and Monthly Event Volume Trends.
  * Why it is done: Interactive charts allow users to hover over data points, inspect exact values, and discover peak seismic activity hours across global time zones.
 
+
+## 📊 Executive BI Reporting & Operational Dashboard (`Power BI`)
+
+To provide executive stakeholders, regional planners, and emergency command centers with high-level operational intelligence, this platform includes an executive-grade **Power BI Dashboard** connected directly to the BigQuery star-schema data marts (`dim_earthquake_location` and `fct_earthquake_events`).
+
+The report features an executive dark-mode layout, structured KPI metric cards, spatial map breakdowns, and temporal trend analysis.
+
+---
+
+### 📂 Dashboard Architecture & Layout Structure
+
+```text
+[ BigQuery Star-Schema Marts ] (dim_earthquake_location & fct_earthquake_events)
+               │
+               v
+[ Power BI Direct Query / Import ] (Data Modeling & Relational Joins on earthquake_id)
+               │
+               v
+[ Executive Dark-Theme Canvas ] (SOC-Optimized Visual Reporting Layout)
+               ├───> [ Top KPI Cards ] (Total Earthquakes, Avg Depth, Avg Magnitude, Azimuthal Gap)
+               ├───> [ Trend & Spatial Charts ] (Monthly Volume Trends & Global Map Breakdown)
+               └───> [ Granular Data Matrix ] (Regional Risk Profiles, Alert Levels, & Significance Scores)
+```
+⚙️ Core Dashboard Components & Executive Value
+1. Executive Summary KPI Cards
+ * What it displays: High-impact metric cards tracking Total Earthquake Events, Average Depth (km), Average Magnitude, and Average Azimuthal Gap.
+ * Why it is used: Delivers immediate, high-level operational situational awareness for stakeholders without requiring deep data exploration.
+2. Temporal & Seasonal Trend Analysis (Total Earthquake By Month)
+ * What it displays: A structured column chart illustrating earthquake frequency distribution across months (from January through December).
+ * Why it is used: Helps researchers identify seasonal seismic patterns, tectonic shift periodicities, and historical activity spikes across calendar years.
+3. Geospatial Mapping & Location Breakdown (Location Breakdown)
+ * What it displays: An interactive global map visual mapping exact spatial latitude and longitude coordinates, pairedside a detailed tabular breakdown of estimated countries/states (e.g., Afghanistan, Alaska).
+ * Why it is used: Pinpoints high-risk seismic fault lines and geographic regions requiring priority disaster management and infrastructural reinforcement.
+4. Granular Risk & Alert Matrix
+ * What it displays: A comprehensive data matrix evaluating regional risk profiles (Critical High Risk, Elevated Risk, Standard Monitoring), alert levels (green, yellow, orange, red), and aggregated significance scores.
+ * Why it is used: Empowers safety administrators to filter events by severity tiers and deploy emergency resources proactively based on scientific telemetry.
+
+---
+
