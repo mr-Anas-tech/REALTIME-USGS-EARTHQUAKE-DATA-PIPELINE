@@ -450,3 +450,42 @@ To predict high-risk seismic events based on historical patterns, this project i
    * Accuracy: 1.00
    * Precision / Recall / F1-Score: 1.00 across target classifications, confirming a highly reliable predictive baseline.
 
+## 🌐 Interactive Web Application & Cloud Deployment (`Streamlit & Plotly`)
+
+To provide researchers, emergency response teams, and decision-makers with real-time visibility into global seismic telemetry, this platform deploys an interactive, web-based analytics dashboard hosted on **Streamlit Community Cloud**.
+
+The application queries production-ready BigQuery data marts (`dim_earthquake_location` and `fct_earthquake_events`), applying caching mechanisms and custom CSS styling designed for Security Operations Center (SOC) environments.
+
+---
+
+### 📂 Application Architecture & Interactive Features
+
+```text
+[ Streamlit Community Cloud App ] (Deployed Web Interface)
+                 │
+                 v
+[ Secure BigQuery Connection ] (Streamlit Secrets Management & Resource Caching)
+                 │
+                 v
+[ Interactive Sidebar Control ] (Dynamic Magnitude Sliders & Multi-Select Alert Filters)
+                 │
+                 v
+[ SOC Dark-Theme Visual Layer ] (KPI Metric Cards, Geospatial Maps, & Plotly Analytics)
+```
+⚙️ Core Operations & User Experience Design
+1. Cloud Authentication & High-Performance Data Caching
+ * What happens: The web application securely authenticates with BigQuery using service account credentials stored in Streamlit Secrets (st.secrets["GCP_SA_KEY"]). Data queries are wrapped with @st.cache_data(ttl=3600) to cache dimension and fact datasets in memory for up to 1 hour.
+ * Why it is done: Storing secrets in environment configuration prevents credential leaks. Server-side data caching significantly reduces BigQuery query execution costs and provides instant dashboard load times for end users.
+2. Dynamic Filtering & Real-Time KPI Monitoring
+ * What happens: Users can interactively filter thousands of seismic events using sidebar sliders for magnitude ranges and multi-select dropdowns for alert levels (green, yellow, orange, red). Top-level metric cards instantly compute real-time summaries: Total Seismic Events, Maximum/Average Magnitude, and Maximum/Average Depth (km).
+ * Why it is done: Enables analysts to slice through global dataset volumes dynamically and isolate high-severity seismic events without needing SQL knowledge.
+3. Spatial Distribution & Top Risk Locations
+ * What happens: The dashboard renders an interactive global map displaying latitude and longitude event points alongside a structured data table highlighting the Top 10 High-Frequency Seismic Locations (e.g., Fiji region, South Sandwich Islands, Kermadec Islands).
+ * Why it is done: Provides immediate geospatial situational awareness to track active earthquake zones and tectonic plate faultlines.
+4. Plotly Interactive Visual Analytics
+ * What happens: The platform embeds customizable Plotly dark-theme charts:
+   * Event Type Breakdown: Donut charts illustrating proportions of seismic activity types (Earthquakes, Mining Explosions, Landslides, Ice Quakes).
+   * Alert Level Distributions: Color-coded risk proportion charts categorizing severity levels.
+   * Temporal Trends: Interactive line and bar charts tracking Hourly Earthquake Rates and Monthly Event Volume Trends.
+ * Why it is done: Interactive charts allow users to hover over data points, inspect exact values, and discover peak seismic activity hours across global time zones.
+
