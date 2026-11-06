@@ -379,8 +379,8 @@ Distributed under the MIT License. See `LICENSE` for details.
 
 ## 👤 Author
 
-Your Name
 
+- Name: Muhammad Anas
 - GitHub: [@USERNAME](https://github.com/mr-Anas-tech)
 - LinkedIn: [linkedin.com/in/username](https://www.linkedin.com/in/muhammad-anas-5795923a9?utm_source=share_via&utm_content=profile&utm_medium=member_android)
 - Email: mranaskhudabukh@gmail.com
