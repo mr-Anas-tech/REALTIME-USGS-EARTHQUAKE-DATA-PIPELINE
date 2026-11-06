@@ -96,6 +96,14 @@ resource "google_bigquery_table" "raw_usgs_data" {
 
 ---
 
+
+
+https://github.com/user-attachments/assets/75b4d529-0719-44c6-a461-9359c570a581
+
+
+
+
+
 ### 2. Autonomous Ingestion and Deduplication (main.py)
 
 The Python ingestion service performs delta updates only, avoiding redundant writes.
@@ -143,6 +151,10 @@ A scheduled workflow provisions an ephemeral runner, installs dependencies, and 
 
 ---
 
+<img width="1917" height="885" alt="Screenshot 2026-11-05 100614" src="https://github.com/user-attachments/assets/c6e576f3-da5d-4d97-a824-31053f3f0d47" />
+
+
+
 ### 5. Data Transformation (dbt Cloud)
 
 The dbt layer transforms semi-structured raw logs into a structured star schema ready for BI and ML.
@@ -172,6 +184,10 @@ The dbt layer transforms semi-structured raw logs into a structured star schema 
 
 ---
 
+
+https://github.com/user-attachments/assets/c70077f7-9d89-4c55-9c7d-f12682aa49db
+
+
 ### 6. Machine Learning (XGBoost and MLflow)
 
 **Objective:** predict `is_high_risk` (magnitude greater than or equal to 4.0) from historical seismic features.
@@ -194,6 +210,7 @@ The dbt layer transforms semi-structured raw logs into a structured star schema 
 | Precision / Recall / F1 | 1.00 |
 
 > **Note on model scores:** the target is derived directly from `magnitude`, which is also included as a feature. Perfect scores therefore reflect a clean boundary rather than true generalization. This baseline establishes the end-to-end MLflow to BigQuery to model artifact plumbing. Future iterations will predict from independent seismic precursors to avoid target leakage.
+<img width="1728" height="737" alt="Screenshot 2026-11-05 105050" src="https://github.com/user-attachments/assets/92e0e158-1a81-4c30-8c50-0b544b858c13" />
 
 ---
 
@@ -239,6 +256,13 @@ An executive-grade dashboard connected to the BigQuery star-schema marts. The re
 - **Granular Risk & Alert Matrix:** A comprehensive data matrix evaluating regional risk profiles (e.g., Afghanistan, Hubbard Glacier Earthquake) by alert level (green, yellow, etc.) and aggregated significance scores.
 
 **Purpose:** Enables stakeholders to filter by severity, identify fault-line hotspots, and deploy emergency resources proactively without writing SQL.
+
+
+
+
+https://github.com/user-attachments/assets/8b395d53-c96d-48f4-b6bd-8b779503c368
+
+
 
 ## 📂 Repository Structure
 
