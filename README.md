@@ -76,6 +76,9 @@ USGS API → Python Ingestion → BigQuery Raw → dbt Models → Star Schema
 
 Cloud resources are fully managed to guarantee immutable, drift-free deployments. The `providers.tf` file binds execution to GCP project `usgs-511715` using HashiCorp Google provider version constraint `~> 5.0`. The `main.tf` file declares the `Earthquake_raw` dataset with US multi-region location and the `raw_usgs_data` table with dynamic schema discovery on first load.
 
+<img width="1917" height="885" alt="Screenshot 2026-11-05 100614" src="https://github.com/user-attachments/assets/c6e576f3-da5d-4d97-a824-31053f3f0d47" />
+
+
 ```hcl
 resource "google_bigquery_dataset" "Earthquake_raw" {
   dataset_id                 = "Earthquake_raw"
@@ -150,9 +153,6 @@ A scheduled workflow provisions an ephemeral runner, installs dependencies, and 
 - **Realistic cadence:** GitHub shared-runner queue means actual runs land every 4 to 5 hours, perfectly matching USGS update patterns while preserving free-tier quotas.
 
 ---
-
-<img width="1917" height="885" alt="Screenshot 2026-11-05 100614" src="https://github.com/user-attachments/assets/c6e576f3-da5d-4d97-a824-31053f3f0d47" />
-
 
 
 ### 5. Data Transformation (dbt Cloud)
