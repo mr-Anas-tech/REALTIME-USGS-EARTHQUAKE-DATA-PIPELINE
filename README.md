@@ -276,6 +276,12 @@ https://github.com/user-attachments/assets/8b395d53-c96d-48f4-b6bd-8b779503c368
 https://drive.google.com/file/d/10QKjwBx0vg-tvDllNKgAHd6HG2-n9DOx/view?usp=sharing
 
 
+
+<img width="1477" height="777" alt="Screenshot 2026-11-06 150127" src="https://github.com/user-attachments/assets/05a64ef9-89ef-4668-86b1-d0862f93f295" />
+<img width="1397" height="822" alt="Screenshot 2026-11-06 150058" src="https://github.com/user-attachments/assets/89c3217b-619e-4f08-a6a8-16aa628df0e1" />
+
+
+
 ## 📂 Repository Structure
 
 ```
