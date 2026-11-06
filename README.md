@@ -220,7 +220,15 @@ A SOC-style dark-themed analytics dashboard deployed on Streamlit Community Clou
 
 **Live Application Screenshot & Insights:**
 
-*(Note: Replace this text with the actual screenshot of your Streamlit app in your repo)*
+<img width="1907" height="870" alt="Screenshot 2026-10-06 154029" src="https://github.com/user-attachments/assets/a027685e-8888-4687-9ba2-372059b6ebf4" />
+<img width="1916" height="902" alt="Screenshot 2026-10-06 154057" src="https://github.com/user-attachments/assets/121930f6-e910-46a0-9706-8cb59822d5f7" />
+<img width="1907" height="868" alt="Screenshot 2026-10-06 154134" src="https://github.com/user-attachments/assets/80a50e9b-f454-4c7b-a919-e719d3d2194f" />
+<img width="1911" height="833" alt="Screenshot 2026-10-06 154201" src="https://github.com/user-attachments/assets/5dbdbf27-e32b-4b35-8605-ab62bc22f3d2" />
+
+<img width="1562" height="756" alt="Screenshot 2026-10-06 154231" src="https://github.com/user-attachments/assets/e5851bee-920a-4da9-bc60-ca41acdf1930" />
+
+
+
 
 **Features & Real-Time Insights:**
 
