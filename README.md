@@ -142,7 +142,6 @@ A scheduled workflow provisions an ephemeral runner, installs dependencies, and 
 - **Secure setup:** Python 3.12 runtime with requirements installation.
 - **Autonomous run:** main.py injected with `GCP_SA_KEY` and `GEMINI_API_KEY` secrets.
 
-<img width="1917" height="891" alt="Screenshot 2026-11-05 103001" src="https://github.com/user-attachments/assets/5c0a1a10-c226-42f9-b4d0-422f5bc8bd07" />
 <img width="1896" height="946" alt="Screenshot 2026-11-05 100744" src="https://github.com/user-attachments/assets/fa06f01a-0b99-4dd0-b35e-e8e4b9f61a1b" />
 **Operational rationale:**
 
@@ -184,7 +183,7 @@ The dbt layer transforms semi-structured raw logs into a structured star schema 
 - Average build time under 1 minute per cycle
 <img width="1917" height="786" alt="Screenshot 2026-11-05 100708" src="https://github.com/user-attachments/assets/06bd7007-43c0-4d80-8899-9b893f53afbc" />
 <img width="1882" height="880" alt="Screenshot 2026-11-05 103100" src="https://github.com/user-attachments/assets/7aff141c-ea5a-48a3-9c9a-a8a5b1bbb529" />
-
+<img width="1917" height="891" alt="Screenshot 2026-11-05 103001" src="https://github.com/user-attachments/assets/5c0a1a10-c226-42f9-b4d0-422f5bc8bd07" />
 ---
 
 
