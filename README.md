@@ -2,7 +2,7 @@
 
 An enterprise-grade, cloud-native Analytics Engineering platform that ingests, transforms, models, and predicts global earthquake telemetry from the United States Geological Survey (USGS). Powered by an AI self-healing ingestion engine that eliminates pipeline downtime caused by schema drift.
 
-![Ingestion Workflow](https://github.com/USERNAME/USGS-REALTIME-EARTHQUAKE-DATA-PIPELINE/actions/workflows/usgs_ingestion.yml/badge.svg)
+![Ingestion Workflow](https://github.com/mr-Anas-tech/USGS-REALTIME-EARTHQUAKE-DATA-PIPELINE/actions/workflows/usgs_ingestion.yml/badge.svg)
 ![dbt](https://img.shields.io/badge/dbt-Cloud-FF694B)
 ![BigQuery](https://img.shields.io/badge/BigQuery-Google_Cloud-4285F4)
 ![Terraform](https://img.shields.io/badge/Terraform-IaC-7B42BC)
