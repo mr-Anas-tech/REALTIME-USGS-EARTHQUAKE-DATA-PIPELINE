@@ -272,6 +272,8 @@ An executive-grade dashboard connected to the BigQuery star-schema marts. The re
 
 https://github.com/user-attachments/assets/8b395d53-c96d-48f4-b6bd-8b779503c368
 
+- **Power BI Dashboard Link:
+https://drive.google.com/file/d/10QKjwBx0vg-tvDllNKgAHd6HG2-n9DOx/view?usp=sharing
 
 
 ## 📂 Repository Structure
