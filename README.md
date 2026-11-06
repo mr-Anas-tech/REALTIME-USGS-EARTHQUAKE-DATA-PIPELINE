@@ -100,7 +100,36 @@ except Exception as bq_err:
         healed_df = ai_self_heal_data(df, str(bq_err))
         pandas_gbq.to_gbq(healed_df, destination_table=full_tabble_path, ...)
 ```
+## ⚡ Automated Continuous Ingestion Pipeline (`GitHub Actions`)
 
+To ensure global seismic telemetry is collected continuously without manual execution, this platform leverages a scheduled **GitHub Actions CI/CD workflow**. 
+
+The automation pipeline provisions a virtual runtime on demand, installs project dependencies securely, and executes the Python ingestion service while authenticating with Google Cloud Platform and Gemini AI using encrypted repository secrets.
+
+---
+
+### 📂 Workflow Architecture & Execution Flow
+
+```text
+[ GitHub Scheduler Trigger ] (Configured Cron Schedule & Manual Workflow Dispatch)
+            │
+            v
+[ Ephemeral Runner Environment ] (Hosted ubuntu-latest Virtual Machine)
+            │
+            v
+[ Secure Environment Setup ] (Python 3.12 Runtime & Requirements Installation)
+            │
+            v
+[ Autonomous Pipeline Run ] (Injected with GCP Service Account & Gemini API Secrets)
+```
+⚙️ Core Operations & Operational Rationale
+1. Serverless Scheduled Ingestion & Credential Injection
+ * What happens: The workflow triggers on a scheduled cron cadence while supporting on-demand workflow_dispatch manual triggers. It dynamically pulls repository code, sets up an isolated Python 3.12 runner, installs required data engineering libraries, and passes encrypted GCP_SA_KEY and GEMINI_API_KEY environment secrets to main.py.
+ * Why it is done: Completely removes reliance on local machines or dedicated server upkeep. Storing service keys inside GitHub Secrets prevents API key exposure, ensuring production-grade security compliance.
+2. Execution Frequency & Free Tier Scheduling Dynamics
+ * What happens: While configured for periodic batch pulls, actual GitHub Actions scheduling on public repositories operates under shared queue constraints, executing approximately every 4 to 5 hours based on GitHub runner availability.
+ * Why it is done: This batch interval aligns perfectly with USGS data update patterns, maximizing processing efficiency while avoiding unnecessary API polling costs and preserving monthly GitHub Actions runner quotas.
+ * 
 ## 🔄 Data Transformation & Modeling Layer (`dbt Cloud`)
 
 To transition raw, semi-structured seismic logs into a structured star schema ready for Power BI reporting, this project uses **dbt (Data Build Tool)** integrated with Google BigQuery. 
@@ -420,5 +449,4 @@ To predict high-risk seismic events based on historical patterns, this project i
  * Classification Metrics:
    * Accuracy: 1.00
    * Precision / Recall / F1-Score: 1.00 across target classifications, confirming a highly reliable predictive baseline.
-?
 
