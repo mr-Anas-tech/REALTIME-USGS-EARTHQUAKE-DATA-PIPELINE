@@ -528,3 +528,40 @@ The report features an executive dark-mode layout, structured KPI metric cards, 
 
 ---
 
+---
+
+## 📂 Repository File Structure
+
+The project follows a clean, modular repository layout separating Infrastructure as Code, CI/CD automation, dbt data modeling, Machine Learning scripts, and web reporting layers.
+
+```text
+USGS-REALTIME-EARTHQUAKE-DATA-PIPELINE/
+├── .github/
+│   └── workflows/
+│       └── usgs_ingestion.yml       # GitHub Actions CI/CD automation workflow (Runs ingestion on schedule)
+├── ML/
+│   └── train_model.py               # XGBoost Classifier training & MLflow experiment tracking script
+├── models/
+│   └── Earthquake_usgs/             # dbt Transformation models directory
+│       ├── intermediate/
+│       │   └── int_earthquake_enriched.sql  # JSON array coordinate extraction & business logic flags
+│       ├── marts/
+│       │   ├── dim_earthquake_location.sql  # Geographical dimension table
+│       │   └── fct_earthquake_events.sql    # Seismic event facts & latency metrics table
+│       ├── earthquake.sql           # Staging view model (Type casting & schema standardization)
+│       ├── earthquake.yml           # BigQuery source configuration & freshness checks
+│       └── marts_test.yml           # Automated data quality tests (Unique, Not Null, Accepted Values)
+├── macros/                          # dbt custom SQL macros directory
+├── seeds/                           # dbt static seed data reference files
+├── snapshots/                       # dbt Type-2 Slowly Changing Dimension snapshots
+├── tests/                           # Custom dbt data integrity test queries
+├── .gitignore                       # Git exclusion file for credentials, envs, and cache
+├── dbt_project.yml                  # Root dbt project configuration file
+├── main.py                          # Core Python ingestion script with Gemini 2.5 AI Self-Healing agent
+├── main.tf                          # Terraform infrastructure deployment file (BigQuery dataset & tables)
+├── providers.tf                     # Terraform GCP provider setup and version constraints
+├── requirements.txt                 # Python dependency environment specification
+├── usgs_python_dashboard.py         # Streamlit interactive dark-mode web application
+└── README.md                        # Enterprise-grade project documentation
+
+```
