@@ -174,7 +174,7 @@ def run_usgs_pipeline():
                 project_id=project_id,
                 credentials=credentials,
                 if_exists="append",
-                progress_bar=Fals
+                progress_bar=False
             )
             print("🎉 SUCCESS: Gemini AI Self-Healing resolved the issue and pipeline completed!")
         else:
