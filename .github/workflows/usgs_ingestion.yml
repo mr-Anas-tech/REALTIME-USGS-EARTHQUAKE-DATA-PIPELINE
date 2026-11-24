@@ -1,12 +1,12 @@
 name: USGS Real-time Earthquake Ingestion
 
-on:
-  schedule:
+#on:
+  #schedule:
     # execution on every 30 minutes
-    - cron: '17,47 * * * *'
+    #- cron: '17,47 * * * *'
   workflow_dispatch:
 
-jobs:
+#jobs:
   ingest-data:
     runs-on: ubuntu-latest
 
